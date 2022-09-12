@@ -6,7 +6,6 @@ controller.list = (req, res) => {
             if (err) {
                 res.json(err);
             }
-            console.log(usuarios.NombreUsuario)
             res.render('customers', {
                 data: usuarios
             });
