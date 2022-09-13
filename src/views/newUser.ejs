@@ -15,45 +15,14 @@
             <div class="card-body">
                 <h5 class="card-title">Registrarse</h5>
                 <br>
-                <form class="row g-3 needs-validation" novalidate>
-                    <div class="form-floating mb-3">
-                        <input type="email" class="form-control" id="floatingInput" required required>
-                        <label for="floatingInput">Nombre</label>
-                    </div>
-                    <div class="invalid-feedback">
-                        Este campo es obligatorio.
-                    </div>
-                    <div class="form-floating mb-3">
-                        <input type="email" class="form-control" id="floatingInput" required>
-                        <label for="floatingInput">Apellido</label>
-                    </div>
-                    <div class="form-floating mb-3">
-                        <input type="email" class="form-control" id="floatingInput" required>
-                        <label for="floatingInput">E-mail</label>
-                    </div>
-                    <div class="form-floating mb-3">
-                        <input type="email" class="form-control" id="floatingInput" required>
-                        <label for="floatingInput">Contraseña</label>
-                    </div>
-                    <div class="form-floating mb-3">
-                        <input type="email" class="form-control" id="floatingInput" required>
-                        <label for="floatingInput">Teléfono</label>
-                    </div>
-                    <div class="form-floating mb-3">
-                        <input type="email" class="form-control" id="floatingInput" required>
-                        <label for="floatingInput">Calle</label>
-                    </div>
-                    <div class="form-floating mb-3">
-                        <input type="email" class="form-control" id="floatingInput" required>
-                        <label for="floatingInput">Número</label>
-                    </div>
-                    <div class="form-floating mb-3">
-                        <input type="email" class="form-control" id="floatingInput" required>
-                        <label for="floatingInput">Piso/Depto</label>
-                    </div>
-                    <div class="col-12">
-                        <button class="btn btn-primary" type="submit">Submit form</button>
-                    </div>
+                <form action="saveData" method="POST">
+                    <pre>
+      Enter your Email    : <input type="text" name="email"> <br>
+      Enter your Name     : <input type="text" name="name"> <br>
+      Enter your Number   : <input type="number" name="mobile"> <br>
+      Enter your Password : <input type="password" name="password"> <br>
+      <input type="submit" value="Submit Form">
+  </pre>
                 </form>
             </div>
         </div>
@@ -61,7 +30,29 @@
 
 </body>
 <script>
+    const { body, validationResult } = require('express-validator');
 
+    app.post('/saveData',
+        body('email').isEmail().normalizeEmail(),
+        body('password').isLength({
+            min: 6
+        }),
+        (req, res) => {
+            const errors = validationResult(req);
+
+            if (!errors.isEmpty()) {
+                return res.status(400).json({
+                    success: false,
+                    errors: errors.array()
+                });
+            }
+
+            res.status(200).json({
+                success: true,
+                message: 'Login successful',
+            })
+
+        });
 </script>
 
 </html>

@@ -3,7 +3,7 @@ const path = require('path');
 const morgan = require('morgan');
 const mysql = require('mysql2');
 const myConnection = require('express-myconnection');
-
+const bodyParser = require('body-parser');
 const app = express();
 
 app.use('/css', express.static(path.join(__dirname, 'node_modules/bootstrap/dist/css')));
@@ -23,10 +23,12 @@ app.use(morgan('dev'));
 app.use(myConnection(mysql, {
     host: 'localhost',
     user: 'root',
-    password: 'Lenovo1583',
+    password: '',
     port: 3308,
     database: 'masukotto'
 }, 'single'));
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 
 // routes
 app.use('/', customerRoutes);
