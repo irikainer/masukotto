@@ -13,5 +13,4 @@ controller.list = (req, res) => {
     });
 };
 
-
 module.exports = controller;

@@ -15,44 +15,44 @@
             <div class="card-body">
                 <h5 class="card-title">Registrarse</h5>
                 <br>
-                <form action="saveData" method="POST">
-                    <pre>
-      Enter your Email    : <input type="text" name="email"> <br>
-      Enter your Name     : <input type="text" name="name"> <br>
-      Enter your Number   : <input type="number" name="mobile"> <br>
-      Enter your Password : <input type="password" name="password"> <br>
-      <input type="submit" value="Submit Form">
-  </pre>
+                <form action="/registerUser" method="POST">
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="idTipoUsuario" value="0" id="tipoUsuario">
+                        <label class="form-check-label" for="tipoUsuario">
+                            Usuario
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="idTipoUsuario" value="1" id="tipoGuarderia">
+                        <label class="form-check-label" for="tipoGuarderia">
+                            Guardería
+                        </label>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input class="form-control" name="NombreUsuario" id="NombreUsuario">
+                        <label for="NombreUsuario">Nombre</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input class="form-control" name="ApellidoUsuario" id="ApellidoUsuario">
+                        <label for="ApellidoUsuario">Apellido</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input type="email" class="form-control" name="MailUsuario" id="MailUsuario">
+                        <label for="MailUsuario">E-mail</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input type="password" class="form-control" name="PassUsuario" id="PassUsuario"
+                            placeholder="PassUsuario">
+                        <label for="password">Password</label>
+                    </div>
+                    <button type="submit" class="btn btn-primary">
+                        Registrarme
+                    </button>
                 </form>
             </div>
         </div>
     </div>
 
 </body>
-<script>
-    const { body, validationResult } = require('express-validator');
-
-    app.post('/saveData',
-        body('email').isEmail().normalizeEmail(),
-        body('password').isLength({
-            min: 6
-        }),
-        (req, res) => {
-            const errors = validationResult(req);
-
-            if (!errors.isEmpty()) {
-                return res.status(400).json({
-                    success: false,
-                    errors: errors.array()
-                });
-            }
-
-            res.status(200).json({
-                success: true,
-                message: 'Login successful',
-            })
-
-        });
-</script>
 
 </html>
