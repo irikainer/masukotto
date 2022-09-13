@@ -2,9 +2,13 @@ const express = require('express');
 const path = require('path');
 const morgan = require('morgan');
 const mysql = require('mysql2');
-const myConnection = require('express-myconnection')
+const myConnection = require('express-myconnection');
 
 const app = express();
+
+app.use('/css', express.static(path.join(__dirname, 'node_modules/bootstrap/dist/css')));
+app.use('/js', express.static(path.join(__dirname, 'node_modules/bootstrap/dist/js')));
+app.use('/js', express.static(path.join(__dirname, 'node_modules/jquery/dist')));
 
 //importing routes
 const customerRoutes = require('./routes/masukotto');
@@ -26,6 +30,9 @@ app.use(myConnection(mysql, {
 
 // routes
 app.use('/', customerRoutes);
+app.get('/register', function (req, res) {
+    res.render('newUser');
+});
 
 // static files
 app.use(express.static(path.join(__dirname, 'public')));
