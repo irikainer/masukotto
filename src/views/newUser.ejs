@@ -15,11 +15,11 @@
             <div class="card-body">
                 <h5 class="card-title display-5 text-center">Registro</h5>
                 <br>
-                <form action="/registerUser" method="POST">
+                <form action="/registerUser" method="POST" class="needs-validation" novalidate>
                     <div class="d-flex justify-content-around mb-3">
                         <div class="form-check">
-                            <input class="form-check-input" type="radio" name="idTipoUsuario" value="0"
-                                id="tipoUsuario">
+                            <input class="form-check-input" type="radio" name="idTipoUsuario" value="0" id="tipoUsuario"
+                                checked>
                             <label class="form-check-label" for="tipoUsuario">
                                 Usuario
                             </label>
@@ -34,27 +34,39 @@
                     </div>
 
                     <div class="row">
-                        <div class="mb-3 col">
+                        <div class="mb-3 col has-validation">
                             <label for="NombreUsuario">Nombre</label>
-                            <input class="form-control" name="NombreUsuario" id="NombreUsuario">
+                            <input class="form-control" name="NombreUsuario" id="NombreUsuario" required>
+                            <div class="invalid-feedback">
+                                Este campo es obligatorio.
+                            </div>
                         </div>
-                        <div class="mb-3 col">
+                        <div class="mb-3 col has-validation">
                             <label for="ApellidoUsuario">Apellido</label>
-                            <input class="form-control" name="ApellidoUsuario" id="ApellidoUsuario">
+                            <input class="form-control" name="ApellidoUsuario" id="ApellidoUsuario" required>
+                            <div class="invalid-feedback">
+                                Este campo es obligatorio.
+                            </div>
                         </div>
                     </div>
 
-                    <div class="mb-3">
+                    <div class="mb-3 has-validation">
                         <label for="MailUsuario">E-mail</label>
-                        <input type="email" class="form-control" name="MailUsuario" id="MailUsuario">
+                        <input type="email" class="form-control" name="MailUsuario" id="MailUsuario" required>
+                        <div class="invalid-feedback">
+                            Este campo es obligatorio.
+                        </div>
                     </div>
-                    <div class="mb-3">
+                    <div class="mb-3 has-validation">
                         <label for="password">Password</label>
-                        <input type="password" class="form-control" name="PassUsuario" id="PassUsuario">
+                        <input type="password" class="form-control" name="PassUsuario" id="PassUsuario" required>
+                        <div class="invalid-feedback">
+                            Este campo es obligatorio.
+                        </div>
                     </div>
-                    <div class="mb-3">
+                    <div class="mb-3 has-validation">
                         <label for="TelefonoUsuario">Teléfono</label>
-                        <input class="form-control" name="TelefonoUsuario" id="TelefonoUsuario">
+                        <input class="form-control" name="TelefonoUsuario" id="TelefonoUsuario" required>
                     </div>
                     <div class="row">
                         <div class="col-5">
@@ -70,21 +82,21 @@
                             </select>
                         </div>
 
-                        <div class="mb-3 col-2">
+                        <div class="mb-3 col-2 has-validation">
                             <label for="CPUsuario">Código postal</label>
-                            <input class="form-control" name="CPUsuario" id="CPUsuario" value="2000">
+                            <input class="form-control" name="CPUsuario" id="CPUsuario" value="2000" required>
                         </div>
                     </div>
                     <div class="row">
-                        <div class="mb-3 col-6">
+                        <div class="mb-3 col-6 has-validation">
                             <label for="DomCalleUsuario">Calle</label>
-                            <input class="form-control" name="DomCalleUsuario" id="DomCalleUsuario">
+                            <input class="form-control" name="DomCalleUsuario" id="DomCalleUsuario" required>
                         </div>
-                        <div class="mb-3 col-3">
+                        <div class="mb-3 col-3 has-validation">
                             <label for="DomNumUsuario">Número</label>
-                            <input class="form-control" name="DomNumUsuario" id="DomNumUsuario">
+                            <input class="form-control" name="DomNumUsuario" id="DomNumUsuario" required>
                         </div>
-                        <div class="mb-3 col-3">
+                        <div class="mb-3 col-3 has-validation">
                             <label for="DomPisoDptoUsuario">Piso/Depto</label>
                             <input class="form-control" name="DomPisoDptoUsuario" id="DomPisoDptoUsuario">
                         </div>
@@ -100,5 +112,26 @@
     </div>
 
 </body>
+
+<script>
+    (() => {
+        'use strict'
+
+        // Fetch all the forms we want to apply custom Bootstrap validation styles to
+        const forms = document.querySelectorAll('.needs-validation')
+
+        // Loop over them and prevent submission
+        Array.from(forms).forEach(form => {
+            form.addEventListener('submit', event => {
+                if (!form.checkValidity()) {
+                    event.preventDefault()
+                    event.stopPropagation()
+                }
+
+                form.classList.add('was-validated')
+            }, false)
+        })
+    })()
+</script>
 
 </html>
