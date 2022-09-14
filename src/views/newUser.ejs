@@ -7,6 +7,7 @@
     <title>Masukotto</title>
     <link rel="stylesheet" href="./css/bootstrap.min.css">
     <link rel="stylesheet" href="https://bootswatch.com/5/litera/bootstrap.min.css">
+    <script defer="defer" src="bootstrap-validate.js"></script>
 </head>
 
 <body>
@@ -15,7 +16,7 @@
             <div class="card-body">
                 <h5 class="card-title display-5 text-center">Registro</h5>
                 <br>
-                <form action="/registerUser" method="POST" class="needs-validation" novalidate>
+                <form action="/registerUser" method="POST" id="registerForm" class="needs-validation" novalidate>
                     <div class="d-flex justify-content-around mb-3">
                         <div class="form-check">
                             <input class="form-check-input" type="radio" name="idTipoUsuario" value="0" id="tipoUsuario"
@@ -44,9 +45,9 @@
                         <div class="mb-3 col has-validation">
                             <label for="ApellidoUsuario">Apellido</label>
                             <input class="form-control" name="ApellidoUsuario" id="ApellidoUsuario" required>
-                            <div class="invalid-feedback">
-                                Este campo es obligatorio.
-                            </div>
+                        </div>
+                        <div class="invalid-feedback">
+                            Este campo es obligatorio.
                         </div>
                     </div>
 
@@ -66,7 +67,10 @@
                     </div>
                     <div class="mb-3 has-validation">
                         <label for="TelefonoUsuario">Teléfono</label>
-                        <input class="form-control" name="TelefonoUsuario" id="TelefonoUsuario" required>
+                        <input type="number" class="form-control" name="TelefonoUsuario" id="TelefonoUsuario" required>
+                        <div class="invalid-feedback">
+                            Este campo es obligatorio.
+                        </div>
                     </div>
                     <div class="row">
                         <div class="col-5">
@@ -85,18 +89,27 @@
                         <div class="mb-3 col-2 has-validation">
                             <label for="CPUsuario">Código postal</label>
                             <input class="form-control" name="CPUsuario" id="CPUsuario" value="2000" required>
+                            <div class="invalid-feedback">
+                                Este campo es obligatorio.
+                            </div>
                         </div>
                     </div>
                     <div class="row">
                         <div class="mb-3 col-6 has-validation">
                             <label for="DomCalleUsuario">Calle</label>
                             <input class="form-control" name="DomCalleUsuario" id="DomCalleUsuario" required>
+                            <div class="invalid-feedback">
+                                Este campo es obligatorio.
+                            </div>
                         </div>
-                        <div class="mb-3 col-3 has-validation">
-                            <label for="DomNumUsuario">Número</label>
+                        <div class="mb-3 col-3">
+                            <label for="DomNumUsuario has-validation">Número</label>
                             <input class="form-control" name="DomNumUsuario" id="DomNumUsuario" required>
+                            <div class="invalid-feedback">
+                                Este campo es obligatorio.
+                            </div>
                         </div>
-                        <div class="mb-3 col-3 has-validation">
+                        <div class="mb-3 col-3">
                             <label for="DomPisoDptoUsuario">Piso/Depto</label>
                             <input class="form-control" name="DomPisoDptoUsuario" id="DomPisoDptoUsuario">
                         </div>
@@ -116,10 +129,8 @@
 <script>
     (() => {
         'use strict'
-
         // Fetch all the forms we want to apply custom Bootstrap validation styles to
         const forms = document.querySelectorAll('.needs-validation')
-
         // Loop over them and prevent submission
         Array.from(forms).forEach(form => {
             form.addEventListener('submit', event => {
