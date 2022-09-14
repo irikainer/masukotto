@@ -20,6 +20,7 @@ router.get("/registroUsuario", (req, res) => {
 
 router.post("/registroUsuario", apis.register);
 router.post("/inicioSesion", apis.login);
-router.get("/logout", apis.logout)
+router.get("/logout", apis.logout);
+
 
 module.exports = router;
