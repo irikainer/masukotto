@@ -18,9 +18,14 @@ router.get("/registroUsuario", (req, res) => {
     res.render("registroUsuario")
 });
 
+router.get("/recuperarPassword", (req, res) => {
+    res.render("recuperarPassword", {alert: false})
+})
+
 router.post("/registroUsuario", apis.register);
 router.post("/inicioSesion", apis.login);
 router.get("/logout", apis.logout);
+router.post("/recuperarPassword", apis.forget);
 
 
 module.exports = router;

@@ -1,4 +1,4 @@
-const { base64encode } = require("nodejs-base64");
+const { base64encode, base64decode  } = require("nodejs-base64");
 const connection = require("../../database/dbConn");
 const {promisify} = require("util")
 const jwt = require("jsonwebtoken")
@@ -23,6 +23,7 @@ controller.register = (req, res) => {
         const email = req.body.email;
         const password = req.body.password;
         let passEncoded = base64encode(password);
+        
         connection.query('INSERT INTO usuarios SET ?', 
         { 
             idUsuario: 4,
@@ -120,6 +121,40 @@ controller.isAuthenticated = async (req, res, next) => {
 controller.logout = (req, res) => {
     res.clearCookie("jwt");
     return res.redirect("/")
+}
+
+controller.forget = (req, res) => {
+    try {
+        const userEmail = req.body.recuperaremail;
+        connection.query("SELECT * FROM usuarios WHERE MailUsuario = ?", [userEmail], (error, results) => {
+            if (results.length === 0) {
+                console.log("Error en la query recuperar password")
+                res.render("recuperarPassword", {
+                    alert: true,
+                    alertTitle: "Advertencia",
+                    alertMessage: "Email incorrecto",
+                    alertIcon: "info",
+                    showConfirmButton: false,
+                    timer: 800,
+                    ruta: "recuperarPassword"
+                });
+            } else {
+                const encodedPass = results[0].PassUsuario;
+                const decodedPass = base64decode(encodedPass);
+                res.render("recuperarPassword", {
+                    alert: true,
+                    alertTitle: "Email correcto",
+                    alertMessage: `Tu password es: ${decodedPass}`,
+                    alertIcon: "success",
+                    showConfirmButton: true,
+                    timer: false,
+                    ruta: "recuperarPassword"
+                }); 
+            }
+        })
+    } catch (error) {
+        console.log(error);
+    }
 }
 
 module.exports = controller;
