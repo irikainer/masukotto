@@ -22,7 +22,7 @@ userController.edit = (req, res) => {
 };
 
 userController.update = (req, res) => {
-    const { id } = 2;
+    const { id } = req.params;
     const newCustomer = req.body;
     req.getConnection((err, conn) => {
         conn.query('UPDATE usuarios set ? where idUsuario = ?', [newCustomer, id], (err, rows) => {

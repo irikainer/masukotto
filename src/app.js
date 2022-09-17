@@ -14,6 +14,7 @@ app.use('/js', express.static(path.join(__dirname, 'node_modules/jquery/dist')))
 const customerRoutes = require('./routes/masukotto');
 
 // settings
+app.use(express.static(__dirname + '/public'));
 app.set('port', process.env.PORT || 3000);
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
@@ -31,7 +32,9 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 // routes
-app.use('/', customerRoutes);
+app.get("/", (req, res) => {
+    res.render('home');
+});
 app.get('/register', function (req, res) {
     res.render('newUser');
 });
