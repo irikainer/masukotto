@@ -13,37 +13,23 @@
     <div class="d-flex justify-content-center">
         <div class="card mt-5 w-75 mb-5">
             <div class="card-body">
-                <h5 class="card-title display-5 text-center">Registro</h5>
+                <h5 class="card-title display-5 text-center">Mi perfil</h5>
                 <br>
-                <form action="/registerUser" method="POST" id="registerForm" class="needs-validation" novalidate>
-                    <div class="d-flex justify-content-around mb-3">
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" name="idTipoUsuario" value="0" id="tipoUsuario"
-                                checked>
-                            <label class="form-check-label" for="tipoUsuario">
-                                Usuario
-                            </label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" name="idTipoUsuario" value="1"
-                                id="tipoGuarderia">
-                            <label class="form-check-label" for="tipoGuarderia">
-                                Guardería
-                            </label>
-                        </div>
-                    </div>
-
+                <form action="/update/<%= data.idUsuario %>" method="POST" id="registerForm" class="needs-validation"
+                    novalidate>
                     <div class="row">
                         <div class="mb-3 col has-validation">
                             <label for="NombreUsuario">Nombre</label>
-                            <input class="form-control" name="NombreUsuario" id="NombreUsuario" required>
+                            <input class="form-control" name="NombreUsuario" id="NombreUsuario" required
+                                value="<%= data.NombreUsuario %>">
                             <div class="invalid-feedback">
                                 Este campo es obligatorio.
                             </div>
                         </div>
                         <div class="mb-3 col has-validation">
                             <label for="ApellidoUsuario">Apellido</label>
-                            <input class="form-control" name="ApellidoUsuario" id="ApellidoUsuario" required>
+                            <input class="form-control" name="ApellidoUsuario" id="ApellidoUsuario" required
+                                value="<%= data.ApellidoUsuario %>">
                         </div>
                         <div class="invalid-feedback">
                             Este campo es obligatorio.
@@ -52,21 +38,16 @@
 
                     <div class="mb-3 has-validation">
                         <label for="MailUsuario">E-mail</label>
-                        <input type="email" class="form-control" name="MailUsuario" id="MailUsuario" required>
-                        <div class="invalid-feedback">
-                            Este campo es obligatorio.
-                        </div>
-                    </div>
-                    <div class="mb-3 has-validation">
-                        <label for="password">Password</label>
-                        <input type="password" class="form-control" name="PassUsuario" id="PassUsuario" required>
+                        <input type="email" class="form-control" name="MailUsuario" id="MailUsuario" required
+                            value="<%= data.MailUsuario %>">
                         <div class="invalid-feedback">
                             Este campo es obligatorio.
                         </div>
                     </div>
                     <div class="mb-3 has-validation">
                         <label for="TelefonoUsuario">Teléfono</label>
-                        <input type="number" class="form-control" name="TelefonoUsuario" id="TelefonoUsuario" required>
+                        <input type="number" class="form-control" name="TelefonoUsuario" id="TelefonoUsuario" required
+                            value="<%= data.TelefonoUsuario %>">
                         <div class="invalid-feedback">
                             Este campo es obligatorio.
                         </div>
@@ -87,7 +68,8 @@
 
                         <div class="mb-3 col-2 has-validation">
                             <label for="CPUsuario">Código postal</label>
-                            <input class="form-control" name="CPUsuario" id="CPUsuario" value="2000" required>
+                            <input class="form-control" name="CPUsuario" id="CPUsuario" value="<%= data.CPUsuario %>"
+                                required>
                             <div class="invalid-feedback">
                                 Este campo es obligatorio.
                             </div>
@@ -96,35 +78,36 @@
                     <div class="row">
                         <div class="mb-3 col-6 has-validation">
                             <label for="DomCalleUsuario">Calle</label>
-                            <input class="form-control" name="DomCalleUsuario" id="DomCalleUsuario" required>
+                            <input class="form-control" name="DomCalleUsuario" id="DomCalleUsuario" required
+                                value="<%= data.DomCalleUsuario %>">
                             <div class="invalid-feedback">
                                 Este campo es obligatorio.
                             </div>
                         </div>
                         <div class="mb-3 col-3">
                             <label for="DomNumUsuario has-validation">Número</label>
-                            <input class="form-control" name="DomNumUsuario" id="DomNumUsuario" required>
+                            <input class="form-control" name="DomNumUsuario" id="DomNumUsuario" required
+                                value="<%= data.DomNumUsuario %>">
                             <div class="invalid-feedback">
                                 Este campo es obligatorio.
                             </div>
                         </div>
                         <div class="mb-3 col-3">
                             <label for="DomPisoDptoUsuario">Piso/Depto</label>
-                            <input class="form-control" name="DomPisoDptoUsuario" id="DomPisoDptoUsuario">
+                            <input class="form-control" name="DomPisoDptoUsuario" id="DomPisoDptoUsuario"
+                                value="<%= data.DomPisoDptoUsuario %>">
                         </div>
                     </div>
                     <div class="d-flex justify-content-center mt-3">
                         <button type="submit" class="btn btn-primary btn-lg">
-                            Registrarme
+                            Guardar cambios
                         </button>
                     </div>
                 </form>
             </div>
         </div>
     </div>
-
 </body>
-
 <script>
     (() => {
         'use strict'

@@ -23,7 +23,7 @@ app.use(morgan('dev'));
 app.use(myConnection(mysql, {
     host: 'localhost',
     user: 'root',
-    password: 'Lenovo1583',
+    password: '',
     port: 3308,
     database: 'masukotto'
 }, 'single'));
@@ -34,6 +34,9 @@ app.use(bodyParser.json());
 app.use('/', customerRoutes);
 app.get('/register', function (req, res) {
     res.render('newUser');
+});
+app.get('/profile/:id', function (req, res) {
+    res.render('profile');
 });
 
 // static files
