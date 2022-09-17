@@ -1,147 +1,138 @@
-<!doctype html>
-<html lang="en">
-
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Masukotto</title>
-    <link rel="stylesheet" href="./css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://bootswatch.com/5/litera/bootstrap.min.css">
-</head>
-
-<body>
-    <div class="d-flex justify-content-center">
-        <div class="card mt-5 w-75 mb-5">
-            <div class="card-body">
-                <h5 class="card-title display-5 text-center">Registro</h5>
-                <br>
-                <form action="/registerUser" method="POST" id="registerForm" class="needs-validation" novalidate>
-                    <div class="d-flex justify-content-around mb-3">
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" name="idTipoUsuario" value="0" id="tipoUsuario"
-                                checked>
-                            <label class="form-check-label" for="tipoUsuario">
-                                Usuario
-                            </label>
+<%- include('partials/header') %>
+    <%- include('partials/navbar') %>
+        <div class="d-flex justify-content-center">
+            <div class="card mt-5 w-75 mb-5">
+                <div class="card-body">
+                    <h5 class="card-title display-5 text-center">Registro</h5>
+                    <br>
+                    <form action="/registerUser" method="POST" id="registerForm" class="needs-validation" novalidate>
+                        <div class="d-flex justify-content-around mb-3">
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="idTipoUsuario" value="0"
+                                    id="tipoUsuario" checked>
+                                <label class="form-check-label" for="tipoUsuario">
+                                    Usuario
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="idTipoUsuario" value="1"
+                                    id="tipoGuarderia">
+                                <label class="form-check-label" for="tipoGuarderia">
+                                    Guardería
+                                </label>
+                            </div>
                         </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" name="idTipoUsuario" value="1"
-                                id="tipoGuarderia">
-                            <label class="form-check-label" for="tipoGuarderia">
-                                Guardería
-                            </label>
-                        </div>
-                    </div>
 
-                    <div class="row">
-                        <div class="mb-3 col has-validation">
-                            <label for="NombreUsuario">Nombre</label>
-                            <input class="form-control" name="NombreUsuario" id="NombreUsuario" required>
+                        <div class="row">
+                            <div class="mb-3 col has-validation">
+                                <label for="NombreUsuario">Nombre</label>
+                                <input class="form-control" name="NombreUsuario" id="NombreUsuario" required>
+                                <div class="invalid-feedback">
+                                    Este campo es obligatorio.
+                                </div>
+                            </div>
+                            <div class="mb-3 col has-validation">
+                                <label for="ApellidoUsuario">Apellido</label>
+                                <input class="form-control" name="ApellidoUsuario" id="ApellidoUsuario" required>
+                            </div>
                             <div class="invalid-feedback">
                                 Este campo es obligatorio.
                             </div>
                         </div>
-                        <div class="mb-3 col has-validation">
-                            <label for="ApellidoUsuario">Apellido</label>
-                            <input class="form-control" name="ApellidoUsuario" id="ApellidoUsuario" required>
-                        </div>
-                        <div class="invalid-feedback">
-                            Este campo es obligatorio.
-                        </div>
-                    </div>
 
-                    <div class="mb-3 has-validation">
-                        <label for="MailUsuario">E-mail</label>
-                        <input type="email" class="form-control" name="MailUsuario" id="MailUsuario" required>
-                        <div class="invalid-feedback">
-                            Este campo es obligatorio.
+                        <div class="mb-3 has-validation">
+                            <label for="MailUsuario">E-mail</label>
+                            <input type="email" class="form-control" name="MailUsuario" id="MailUsuario" required>
+                            <div class="invalid-feedback">
+                                Este campo es obligatorio.
+                            </div>
                         </div>
-                    </div>
-                    <div class="mb-3 has-validation">
-                        <label for="password">Password</label>
-                        <input type="password" class="form-control" name="PassUsuario" id="PassUsuario" required>
-                        <div class="invalid-feedback">
-                            Este campo es obligatorio.
+                        <div class="mb-3 has-validation">
+                            <label for="password">Password</label>
+                            <input type="password" class="form-control" name="PassUsuario" id="PassUsuario" required>
+                            <div class="invalid-feedback">
+                                Este campo es obligatorio.
+                            </div>
                         </div>
-                    </div>
-                    <div class="mb-3 has-validation">
-                        <label for="TelefonoUsuario">Teléfono</label>
-                        <input type="number" class="form-control" name="TelefonoUsuario" id="TelefonoUsuario" required>
-                        <div class="invalid-feedback">
-                            Este campo es obligatorio.
+                        <div class="mb-3 has-validation">
+                            <label for="TelefonoUsuario">Teléfono</label>
+                            <input type="number" class="form-control" name="TelefonoUsuario" id="TelefonoUsuario"
+                                required>
+                            <div class="invalid-feedback">
+                                Este campo es obligatorio.
+                            </div>
                         </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-5">
-                            <label>Provincia</label>
-                            <select class="form-select mb-3" name="ProvinciaUsuario">
-                                <option value="Santa fe" selected>Santa fe</option>
-                            </select>
-                        </div>
-                        <div class="col-5">
-                            <label>Localidad</label>
-                            <select class="form-select mb-3" name="LocalidadUsuario">
-                                <option value="Rosario" selected>Rosario</option>
-                            </select>
-                        </div>
+                        <div class="row">
+                            <div class="col-5">
+                                <label>Provincia</label>
+                                <select class="form-select mb-3" name="ProvinciaUsuario">
+                                    <option value="Santa fe" selected>Santa fe</option>
+                                </select>
+                            </div>
+                            <div class="col-5">
+                                <label>Localidad</label>
+                                <select class="form-select mb-3" name="LocalidadUsuario">
+                                    <option value="Rosario" selected>Rosario</option>
+                                </select>
+                            </div>
 
-                        <div class="mb-3 col-2 has-validation">
-                            <label for="CPUsuario">Código postal</label>
-                            <input class="form-control" name="CPUsuario" id="CPUsuario" value="2000" required>
-                            <div class="invalid-feedback">
-                                Este campo es obligatorio.
+                            <div class="mb-3 col-2 has-validation">
+                                <label for="CPUsuario">Código postal</label>
+                                <input class="form-control" name="CPUsuario" id="CPUsuario" value="2000" required>
+                                <div class="invalid-feedback">
+                                    Este campo es obligatorio.
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="row">
-                        <div class="mb-3 col-6 has-validation">
-                            <label for="DomCalleUsuario">Calle</label>
-                            <input class="form-control" name="DomCalleUsuario" id="DomCalleUsuario" required>
-                            <div class="invalid-feedback">
-                                Este campo es obligatorio.
+                        <div class="row">
+                            <div class="mb-3 col-6 has-validation">
+                                <label for="DomCalleUsuario">Calle</label>
+                                <input class="form-control" name="DomCalleUsuario" id="DomCalleUsuario" required>
+                                <div class="invalid-feedback">
+                                    Este campo es obligatorio.
+                                </div>
+                            </div>
+                            <div class="mb-3 col-3">
+                                <label for="DomNumUsuario has-validation">Número</label>
+                                <input class="form-control" name="DomNumUsuario" id="DomNumUsuario" required>
+                                <div class="invalid-feedback">
+                                    Este campo es obligatorio.
+                                </div>
+                            </div>
+                            <div class="mb-3 col-3">
+                                <label for="DomPisoDptoUsuario">Piso/Depto</label>
+                                <input class="form-control" name="DomPisoDptoUsuario" id="DomPisoDptoUsuario">
                             </div>
                         </div>
-                        <div class="mb-3 col-3">
-                            <label for="DomNumUsuario has-validation">Número</label>
-                            <input class="form-control" name="DomNumUsuario" id="DomNumUsuario" required>
-                            <div class="invalid-feedback">
-                                Este campo es obligatorio.
-                            </div>
+                        <div class="d-flex justify-content-center mt-3">
+                            <button type="submit" class="btn btn-primary btn-lg">
+                                Registrarme
+                            </button>
                         </div>
-                        <div class="mb-3 col-3">
-                            <label for="DomPisoDptoUsuario">Piso/Depto</label>
-                            <input class="form-control" name="DomPisoDptoUsuario" id="DomPisoDptoUsuario">
-                        </div>
-                    </div>
-                    <div class="d-flex justify-content-center mt-3">
-                        <button type="submit" class="btn btn-primary btn-lg">
-                            Registrarme
-                        </button>
-                    </div>
-                </form>
+                    </form>
+                </div>
             </div>
         </div>
-    </div>
 
-</body>
+        </body>
 
-<script>
-    (() => {
-        'use strict'
-        // Fetch all the forms we want to apply custom Bootstrap validation styles to
-        const forms = document.querySelectorAll('.needs-validation')
-        // Loop over them and prevent submission
-        Array.from(forms).forEach(form => {
-            form.addEventListener('submit', event => {
-                if (!form.checkValidity()) {
-                    event.preventDefault()
-                    event.stopPropagation()
-                }
+        <script>
+            (() => {
+                'use strict'
+                // Fetch all the forms we want to apply custom Bootstrap validation styles to
+                const forms = document.querySelectorAll('.needs-validation')
+                // Loop over them and prevent submission
+                Array.from(forms).forEach(form => {
+                    form.addEventListener('submit', event => {
+                        if (!form.checkValidity()) {
+                            event.preventDefault()
+                            event.stopPropagation()
+                        }
 
-                form.classList.add('was-validated')
-            }, false)
-        })
-    })()
-</script>
+                        form.classList.add('was-validated')
+                    }, false)
+                })
+            })()
+        </script>
 
-</html>
+        </html>
