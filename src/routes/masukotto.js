@@ -31,5 +31,10 @@ router.post("/recuperarPassword", apis.forget);
 router.post('/registerUser', userController.save);
 router.get('/profile/:id', userController.edit);
 router.post('/update/:id', userController.update);
+const mascota = require('../controllers/mascotas');
+
+router.get('/', apis.list);
+router.get('/petlist', mascota.list);
+router.post('/petadd', mascota.add)
 
 module.exports = router;
