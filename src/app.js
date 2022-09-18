@@ -3,8 +3,11 @@ const path = require('path');
 const morgan = require('morgan');
 const mysql = require('mysql');
 const myConnection = require('express-myconnection')
+const multer = require('multer')
 
 const app = express();
+
+
 
 //importing routes
 const customerRoutes = require('./routes/masukotto');
@@ -23,6 +26,11 @@ app.use(myConnection(mysql, {
     posrt: 3306,
     database: 'masukotto'
 }, 'single'));
+app.use(multer({
+    dest: path.join(__dirname, 'public/uploads'),
+    limits: { fileSize: 1000000 }
+}).single('image'));
+app.use(express.urlencoded({ extended: false }));
 
 // routes
 app.use('/', customerRoutes);
