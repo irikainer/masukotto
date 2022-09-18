@@ -148,7 +148,7 @@ controller.forget = (req, res) => {
                     alertIcon: "success",
                     showConfirmButton: true,
                     timer: false,
-                    ruta: "recuperarPassword"
+                    ruta: "inicioSesion"
                 }); 
             }
         })
