@@ -12,8 +12,14 @@ mascota.list = (req, res) => {
 };
 
 mascota.add = (req, res) => {
-    res.render('mascotas', { data: 'listaMascotas' });
-
+    const data = Object.values(req.body);
+    console.log(req.body);
+    req.getConnection((err, conn) => {
+        conn.query('INSERT INTO mascotas (idUsuario, NombreMascota, EspecieMascota,RazaMascota,AnioNacimientoMascota,AlimentoMascota,EnfermedadesMascota,VetNombreMascota,VetTelMascota,EstadoMascota) VALUES (8,?,?,?,?,?,?,?,?,"Activa")', data,
+            (err, asd) => {
+                res.redirect('petlist');
+            })
+    })
 }
 
 
