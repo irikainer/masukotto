@@ -26,11 +26,11 @@ app.use(myConnection(mysql, {
     posrt: 3306,
     database: 'masukotto'
 }, 'single'));
+app.use(express.urlencoded({ extended: false }));
 app.use(multer({
     dest: path.join(__dirname, 'public/uploads'),
     limits: { fileSize: 1000000 }
-}).single('image'));
-app.use(express.urlencoded({ extended: false }));
+}).single('foto'));
 
 // routes
 app.use('/', customerRoutes);

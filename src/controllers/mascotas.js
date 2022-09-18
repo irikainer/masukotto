@@ -13,14 +13,21 @@ mascota.list = (req, res) => {
 
 mascota.add = (req, res) => {
     const data = Object.values(req.body);
+    const iduser = req.body.idUsuario
+    console.log(iduser);
     console.log(req.body);
     req.getConnection((err, conn) => {
-        conn.query('INSERT INTO mascotas (idUsuario, NombreMascota, EspecieMascota,RazaMascota,AnioNacimientoMascota,AlimentoMascota,EnfermedadesMascota,VetNombreMascota,VetTelMascota,EstadoMascota) VALUES (8,?,?,?,?,?,?,?,?,"Activa")', data,
-            (err, asd) => {
-                res.redirect('petlist');
-            })
-    })
+            conn.query('INSERT INTO mascotas (idUsuario, NombreMascota, EspecieMascota,RazaMascota,AnioNacimientoMascota,AlimentoMascota,EnfermedadesMascota,VetNombreMascota,VetTelMascota,EstadoMascota) VALUES (8,?,?,?,?,?,?,?,?,"Activa")', data,
+                (err, asd) => {
+                    res.redirect('petlist');
+                })
+        })
+        /*
+        req.getConnection((err,query2) => {
+            query2.query('INSERT INTO fotos (RutaFoto, idUsuario, idMascota, EstadoFoto, DescripcionFoto) VALUES (req.file.filename,8,')
+        })
+        */
+    console.log(req.file.filename);
 }
-
 
 module.exports = mascota;

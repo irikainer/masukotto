@@ -6,92 +6,7 @@
                 <% if (data.length == 0) {%>
                     <h1 class="text-center">Vemos que aun no cargaste ninguna mascota</h1>
 
-                    <!-- Button trigger modal -->
-                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#AltaMascota">Agregar Mascota</button>
 
-                    <!-- Modal -->
-                    <div class="modal fade bd-example-modal-lg" id="AltaMascota" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                        <div class="modal-dialog modal-lg" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLongTitle">Datos de tu Mascota!</h5>
-                                    <button type="button" class="btn btn-light" data-dismiss="modal" aria-label="Close">
-                                            <span aria-hidden="true">X</span>
-                                        </button>
-                                </div>
-                                <div class="modal-body">
-                                    <div class="container-fluid">
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <form action="/petadd" method="post">
-                                                    <label for="NombreMascota">Nombre(*)</label>
-                                                    <input type="text" name="NombreMascota" class="form-control">
-                                            </div>
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label for="EspecieMascota">Especie(*)</label>
-                                                    <select type="text" name="EspecieMascota" class="form-control">
-                                                <option value="Perro">Perro</option>    
-                                                <option value="Gato">Gato</option>    
-                                                <option value="Lagarto/Vivora">Lagarto/Vivora</option>    
-                                                <option value="Roedor">Roedor</option>
-                                                <option value="Ave">Ave</option>
-                                                </select>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-4">
-                                                <label for="RazaMascota">Raza(*)</label>
-                                                <input type="text" name="RazaMascota" class="form-control">
-                                            </div>
-                                            <div class="col-md-4">
-                                                <label for="AnioNacimientoMascota">Año de Nacimiento</label>
-                                                <input type="text" name="AnioNacimientoMascota" class="form-control">
-                                            </div>
-                                            <div class="col-md-4">
-                                                <label for="AlimentoMascota">Alimento</label>
-                                                <input type="text" name="AlimentoMascota" class="form-control">
-                                            </div>
-                                        </div>
-
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <label for="EnfermedadesMascota">Enfermedades</label>
-                                                <textarea name="EnfermedadesMascota" rows="3" class="form-control"></textarea>
-
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="form-group mt-3 mb-3">
-                                                <label for="foto">Foto de Perfil de tu mascota</label>
-                                                <input type="file" class="form-control-file" name="foto">
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <h5>Datos de tu Veterinario</h5>
-
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <label for="VetNombreMascota">Nombre de tu Veterinario</label>
-                                                <input type="text" name="VetNombreMascota" class="form-control">
-                                            </div>
-                                            <div class="col-md-6">
-                                                <label for="VetTelMascota">Telefono de tu Veterinario</label>
-                                                <input type="text" name="VetTelMascota" class="form-control">
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                                    <button type="submit" class="btn btn-primary">Guardar Mascota</button>
-                                </div>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
                     <% }else { %>
                         <table class="table table-bordered table-hover">
                             <thead>
@@ -123,90 +38,94 @@
                                             <% } %>
                             </tbody>
                         </table>
-                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#AltaMascota">Agregar Mascota</button>
-                        <div class="modal fade bd-example-modal-lg" id="AltaMascota" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                            <div class="modal-dialog modal-lg" role="document">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="exampleModalLongTitle">Datos de tu Mascota!</h5>
-                                        <button type="button" class="btn btn-light" data-dismiss="modal" aria-label="Close">
-                                                <span aria-hidden="true">X</span>
-                                            </button>
-                                    </div>
-                                    <div class="modal-body">
-                                        <div class="container-fluid">
-                                            <div class="row">
-                                                <div class="col-md-6">
-                                                    <form action="/petadd" method="post">
-                                                        <label for="NombreMascota">Nombre(*)</label>
-                                                        <input type="text" name="NombreMascota" class="form-control">
+                        <% } %>
+                            <!-- Button trigger modal -->
+                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#AltaMascota">Agregar Mascota</button>
+
+                            <!-- Modal -->
+                            <div class="modal fade bd-example-modal-lg" id="AltaMascota" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                <div class="modal-dialog modal-lg" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLongTitle">Datos de tu Mascota!</h5>
+                                            <button type="button" class="btn btn-light" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">X</span>
+                                        </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div class="container-fluid">
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <form action="/petadd" method="post" enctype="multipart/form-data">
+                                                            <label for="NombreMascota">Nombre(*)</label>
+                                                            <input type="text" name="NombreMascota" class="form-control">
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label for="EspecieMascota">Especie(*)</label>
+                                                            <select type="text" name="EspecieMascota" class="form-control">
+                                                                <option value="Perro">Perro</option>    
+                                                                <option value="Gato">Gato</option>    
+                                                                <option value="Lagarto/Vivora">Lagarto/Vivora</option>    
+                                                                <option value="Roedor">Roedor</option>
+                                                                <option value="Ave">Ave</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
                                                 </div>
-                                                <div class="col-md-6">
-                                                    <div class="form-group">
-                                                        <label for="EspecieMascota">Especie(*)</label>
-                                                        <select type="text" name="EspecieMascota" class="form-control">
-                                                    <option value="Perro">Perro</option>    
-                                                    <option value="Gato">Gato</option>    
-                                                    <option value="Lagarto/Vivora">Lagarto/Vivora</option>    
-                                                    <option value="Roedor">Roedor</option>
-                                                    <option value="Ave">Ave</option>
-                                                    </select>
+                                                <div class="row">
+                                                    <div class="col-md-4">
+                                                        <label for="RazaMascota">Raza(*)</label>
+                                                        <input type="text" name="RazaMascota" class="form-control">
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <label for="AnioNacimientoMascota">Año de Nacimiento</label>
+                                                        <input type="text" name="AnioNacimientoMascota" class="form-control">
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <label for="AlimentoMascota">Alimento</label>
+                                                        <input type="text" name="AlimentoMascota" class="form-control">
+                                                    </div>
+                                                </div>
+
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <label for="EnfermedadesMascota">Enfermedades</label>
+                                                        <textarea name="EnfermedadesMascota" rows="3" class="form-control"></textarea>
+
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <h5>Datos de tu Veterinario</h5>
+
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <label for="VetNombreMascota">Nombre de tu Veterinario</label>
+                                                        <input type="text" name="VetNombreMascota" class="form-control">
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <label for="VetTelMascota">Telefono de tu Veterinario</label>
+                                                        <input type="text" name="VetTelMascota" class="form-control">
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="form-group mt-3 mb-3">
+                                                        <label for="foto">Foto de Perfil de tu mascota</label>
+                                                        <input type="file" class="form-control-file" name="foto">
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="row">
-                                                <div class="col-md-4">
-                                                    <label for="RazaMascota">Raza(*)</label>
-                                                    <input type="text" name="RazaMascota" class="form-control">
-                                                </div>
-                                                <div class="col-md-4">
-                                                    <label for="AnioNacimientoMascota">Año de Nacimiento</label>
-                                                    <input type="text" name="AnioNacimientoMascota" class="form-control">
-                                                </div>
-                                                <div class="col-md-4">
-                                                    <label for="AlimentoMascota">Alimento</label>
-                                                    <input type="text" name="AlimentoMascota" class="form-control">
-                                                </div>
-                                            </div>
-
-                                            <div class="row">
-                                                <div class="col-md-6">
-                                                    <label for="EnfermedadesMascota">Enfermedades</label>
-                                                    <textarea name="EnfermedadesMascota" rows="3" class="form-control"></textarea>
-
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="form-group mt-3 mb-3">
-                                                    <label for="foto">Foto de Perfil de tu mascota</label>
-                                                    <input type="file" class="form-control-file" name="foto">
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <h5>Datos de tu Veterinario</h5>
-
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-md-6">
-                                                    <label for="VetNombreMascota">Nombre de tu Veterinario</label>
-                                                    <input type="text" name="VetNombreMascota" class="form-control">
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <label for="VetTelMascota">Telefono de tu Veterinario</label>
-                                                    <input type="text" name="VetTelMascota" class="form-control">
-                                                </div>
-                                            </div>
                                         </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                                            <button type="submit" class="btn btn-primary">Guardar Mascota</button>
+                                        </div>
+                                        </form>
+
                                     </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                                        <button type="submit" class="btn btn-primary">Guardar Mascota</button>
-                                    </div>
-                                    </form>
                                 </div>
                             </div>
-                        </div>
-                        <% } %>
             </div>
         </div>
 
