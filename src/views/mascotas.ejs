@@ -22,7 +22,9 @@
                                     <% for (i=0;i<data.length;i++){ %>
                                         <tr>
                                             <td>
-                                                <img src="<%= 'uploads/'+data[i].RutaFoto %>" alt="mascota">
+                                                <div class="text-center">
+                                                    <img src="<%= 'uploads/'+data[i].RutaFoto %>" alt="mascota" class="rounded">
+                                                </div>
                                             </td>
                                             <td>
                                                 <%= data[i].NombreMascota %>
