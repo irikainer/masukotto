@@ -2,32 +2,40 @@ const mascota = {};
 
 mascota.list = (req, res) => {
     req.getConnection((err, conn) => {
-        conn.query('SELECT f.RutaFoto, f.DescripcionFoto, m.idMascota, m.idUsuario, m.NombreMascota, m.EspecieMascota, m.RazaMascota, m.AnioNacimientoMascota, m.AlimentoMascota, m.EnfermedadesMascota, m.VetNombreMascota, m.EstadoMascota FROM masukotto.mascotas m LEFT JOIN masukotto.fotos f ON m.idMascota = f.idMascota AND EstadoFoto = "Activa" AND PrincipalFoto = "Si" WHERE m.idUsuario = 8', (err, listaMascotas) => {
-            if (err) {
-                res.json(err);
-            }
-            res.render('mascotas', { data: listaMascotas });
-        })
+        conn.query('SELECT f.RutaFoto, f.DescripcionFoto, m.idMascota, m.idUsuario, m.NombreMascota, m.EspecieMascota, m.RazaMascota, m.AnioNacimientoMascota, m.AlimentoMascota, m.EnfermedadesMascota, m.VetNombreMascota, m.EstadoMascota FROM masukotto.mascotas m LEFT JOIN masukotto.fotos f ON m.idMascota = f.idMascota AND EstadoFoto = 1 AND DescripcionFoto = "PERFIL" WHERE m.idUsuario = 8',
+            (err, listaMascotas) => {
+                if (err) {
+                    console.log(err);
+                }
+                res.render('mascotas', { data: listaMascotas });
+            })
     });
 };
 
 mascota.add = (req, res) => {
     const data = Object.values(req.body);
-    const iduser = req.body.idUsuario
-    console.log(iduser);
-    console.log(req.body);
+    console.log(data);
     req.getConnection((err, conn) => {
-            conn.query('INSERT INTO mascotas (idUsuario, NombreMascota, EspecieMascota,RazaMascota,AnioNacimientoMascota,AlimentoMascota,EnfermedadesMascota,VetNombreMascota,VetTelMascota,EstadoMascota) VALUES (8,?,?,?,?,?,?,?,?,"Activa")', data,
-                (err, asd) => {
-                    res.redirect('petlist');
-                })
-        })
-        /*
-        req.getConnection((err,query2) => {
-            query2.query('INSERT INTO fotos (RutaFoto, idUsuario, idMascota, EstadoFoto, DescripcionFoto) VALUES (req.file.filename,8,')
-        })
-        */
-    console.log(req.file.filename);
+        conn.query('INSERT INTO mascotas (idUsuario, NombreMascota, EspecieMascota,RazaMascota,AnioNacimientoMascota,AlimentoMascota,EnfermedadesMascota,VetNombreMascota,VetTelMascota,EstadoMascota) VALUES (8,?,?,?,?,?,?,?,?,"Activa")', data,
+            (err, ins) => {
+                if (err) {
+                    console.log(err);
+                }
+                console.log('insert de mascota completado');
+            })
+    })
+    req.getConnection((err, query2) => {
+        query2.query('INSERT INTO fotos (RutaFoto, idUsuario, idMascota, EstadoFoto, DescripcionFoto) VALUES (?,?,(SELECT LAST_INSERT_ID() AS LII From masukotto.mascotas GROUP BY LAST_INSERT_ID()),1,"PERFIL")', [req.file.filename, '8'],
+            (err, insf) => {
+                if (err) {
+                    console.log(err);
+                }
+                console.log('Insert de Fotos completado');
+            })
+    })
+
+    //console.log(req.file.filename);
+    res.redirect('petlist');
 }
 
 module.exports = mascota;
