@@ -14,21 +14,18 @@ router.get("/recuperarPassword", (req, res) => {
 });
 
 router.get("/", userSessionController.isAuthenticated, (req, res) => {
-    res.render('home');
+    res.render('home', { session: req.session });
 });
 router.get('/register', function (req, res) {
     res.render('newUser');
 });
-router.get('/profile/', userSessionController.isAuthenticated, function (req, res) {
-    res.render('profile');
-});
+router.get('/profile/:id', userSessionController.isAuthenticated, userController.edit);
 
 router.post("/inicioSesion", userSessionController.login);
 router.get("/logout", userSessionController.isAuthenticated, userSessionController.logout);
 router.post("/recuperarPassword", userSessionController.forget);
 
 router.post('/registerUser', userController.save);
-router.get('/profile/:id', userController.edit);
 router.post('/update/:id', userController.update);
 const mascota = require('../controllers/mascotas');
 

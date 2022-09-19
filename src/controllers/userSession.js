@@ -39,6 +39,9 @@ userSessionController.login = (req, res) => {
                     const token = jwt.sign({ id: userId }, "secret");
                     console.log(`TOKEN: ${token} para el user: ${userEmail}`);
 
+                    req.session.loggedin = true;
+                    req.session.userId = userId;
+
                     const cookiesOptions = {
                         expires: new Date(Date.now() + "90" * 24 * 60 * 60 * 1000),
                         httpOnly: true
@@ -118,6 +121,5 @@ userSessionController.isAuthenticated = async (req, res, next) => {
         res.redirect("/inicioSesion");
     }
 }
-
 
 module.exports = userSessionController;

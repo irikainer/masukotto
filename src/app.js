@@ -55,9 +55,6 @@ app.use('/inicioSesion', customerRoutes);
 app.use('/register', customerRoutes);
 app.use('/profile/:id', customerRoutes);
 
-// static files
-app.use(express.static(path.join(__dirname, 'public')));
-
 app.listen(app.get('port'), () => {
     console.log('masukotto');
 });
