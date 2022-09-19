@@ -6,9 +6,9 @@ const multer = require('multer')
 const bodyParser = require('body-parser');
 const app = express();
 
-app.use('/css', express.static(path.join(__dirname, 'node_modules/bootstrap/dist/css')));
-app.use('/js', express.static(path.join(__dirname, 'node_modules/bootstrap/dist/js')));
-app.use('/js', express.static(path.join(__dirname, 'node_modules/jquery/dist')));
+app.use('/css', express.static(path.join(__dirname, '../node_modules/bootstrap/dist/css')));
+app.use('/js', express.static(path.join(__dirname, '../node_modules/bootstrap/dist/js')));
+app.use('/js', express.static(path.join(__dirname, '../node_modules/jquery/dist')));
 
 //importing routes
 const customerRoutes = require('./routes/masukotto');
