@@ -4,11 +4,12 @@ const morgan = require('morgan');
 const cookieParser = require("cookie-parser");
 const multer = require('multer');
 const session = require('express-session');
+const bodyParser = require('body-parser');
 const app = express();
 
-app.use('/css', express.static(path.join(__dirname, 'node_modules/bootstrap/dist/css')));
-app.use('/js', express.static(path.join(__dirname, 'node_modules/bootstrap/dist/js')));
-app.use('/js', express.static(path.join(__dirname, 'node_modules/jquery/dist')));
+app.use('/css', express.static(path.join(__dirname, '../node_modules/bootstrap/dist/css')));
+app.use('/js', express.static(path.join(__dirname, '../node_modules/bootstrap/dist/js')));
+app.use('/js', express.static(path.join(__dirname, '../node_modules/jquery/dist')));
 
 //importing routes
 const customerRoutes = require('./routes/masukotto');
@@ -23,7 +24,10 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }))
 app.use(morgan('dev'));
-app.use(cookieParser());
+app.use(cookieParser())
+
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 app.use(multer({
     dest: path.join(__dirname, 'public/uploads'),
     limits: { fileSize: 1000000 }
@@ -48,7 +52,11 @@ app.get('/profile/', function (req, res) {
 
 app.use('/', customerRoutes);
 app.use('/inicioSesion', customerRoutes);
-app.use('/registroUsuario', customerRoutes);
+app.use('/register', customerRoutes);
+app.use('/profile/:id', customerRoutes);
+
+// static files
+app.use(express.static(path.join(__dirname, 'public')));
 
 app.listen(app.get('port'), () => {
     console.log('masukotto');
