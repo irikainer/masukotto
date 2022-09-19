@@ -37,7 +37,6 @@ app.use(session({
 
 // routes
 app.get("/", (req, res) => {
-    console.log(req.session)
     res.render('home', { session: req.session });
 });
 app.get('/register', function (req, res) {
