@@ -1,7 +1,7 @@
 const express = require('express');
 const path = require('path');
 const morgan = require('morgan');
-const cookieParser = require("cookie-parser")
+const cookieParser = require("cookie-parser");
 const multer = require('multer')
 const bodyParser = require('body-parser');
 const app = express();
@@ -27,27 +27,16 @@ app.use(cookieParser())
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-app.use(express.urlencoded({ extended: false }));
 app.use(multer({
     dest: path.join(__dirname, 'public/uploads'),
     limits: { fileSize: 1000000 }
 }).single('foto'));
 
-// routes
-app.get("/", (req, res) => {
-    res.render('home');
-});
-app.get('/register', function(req, res) {
-    res.render('newUser');
-});
-app.get('/profile/:id', function(req, res) {
-    res.render('profile');
-});
 
 app.use('/', customerRoutes);
 app.use('/inicioSesion', customerRoutes);
-app.use('/registroUsuario', customerRoutes);
-app.use('/recuperarPassword', customerRoutes);
+app.use('/register', customerRoutes);
+app.use('/profile/:id', customerRoutes);
 
 // static files
 app.use(express.static(path.join(__dirname, 'public')));
