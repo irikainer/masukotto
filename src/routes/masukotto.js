@@ -4,7 +4,6 @@ const router = express.Router();
 const userController = require('../controllers/user');
 const userSessionController = require('../controllers/userSession');
 
-
 router.get("/inicioSesion", (req, res) => {
     res.render("inicioSesion", { alert: false })
 });
@@ -23,9 +22,15 @@ router.get('/profile/:id', userSessionController.isAuthenticated, function(req, 
     res.render('profile');
 });
 
+
+
 router.post("/inicioSesion", userSessionController.login);
 router.get("/logout", userSessionController.isAuthenticated, userSessionController.logout);
 router.post("/recuperarPassword", userSessionController.forget);
+
+const controller = require('../controllers/apis');
+router.get("/users", controller.usersList);
+router.get("/dayCares", controller.dayCaresList);
 
 router.post('/registerUser', userController.save);
 router.get('/profile/:id', userController.edit);

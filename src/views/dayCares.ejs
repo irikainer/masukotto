@@ -11,24 +11,25 @@
                             <table class="table table-borderless mb-0">
                             <thead>
                                 <tr>
-                                <th scope="col">id</th>
-                                <th scope="col">Nombre</th>
-                                <th scope="col">Apellido</th>
+                                <th scope="col">ID Guarderia</th>
+                                <th scope="col">ID Usuario</th>
+                                <th scope="col">Nombre guarderia</th>
                                 </tr>
                             </thead>
                             <tbody>
                                     <% if (data) { %>
-                                        <% data.map(user => { %>
+                                        <% data.map(daycare => { %>
                                             <tr>
                                                 <td>
-                                                    <%= user.idUsuario %>
+                                                    <%= daycare.idGuarderia %>
                                                 </td>
 
                                                 <td>
-                                                    <%= user.NombreUsuario %>
+                                                    <%= daycare.idUsuario %>
                                                 </td>
+
                                                 <td>
-                                                    <%= user.ApellidoUsuario %>
+                                                    <%= daycare.NombreGuarderia %>
                                                 </td>
                                                 <td>
                                                     <button type="button" class="btn btn-danger btn-sm px-3">
@@ -46,8 +47,8 @@
                     </div>
                 </div>
                 <div class="d-flex justify-content-center mt-3">
-                    <a type="button" class="btn btn-primary" href="/dayCares">
-                        Ir a guarderias
+                    <a type="button" class="btn btn-primary" href="/users">
+                        Ir a usuarios
                     </a>
                 </div>
                 </div>
