@@ -1,6 +1,5 @@
 const express = require('express');
 const router = express.Router();
-const path = require("path");
 
 const apis = require('../controllers/apis');
 const userController = require('../controllers/user');
@@ -8,14 +7,10 @@ const userController = require('../controllers/user');
 router.get('/', apis.isAuthenticated, apis.list);
 
 router.get("/inicioSesion", (req, res) => {
-    // res.setHeader("Content-Type", "text/html");
-    // res.sendFile(path.resolve(__dirname, "../views/inicioSesion.ejs"));
     res.render("inicioSesion", { alert: false })
 });
 
 router.get("/registroUsuario", (req, res) => {
-    // res.setHeader("Content-Type", "text/html");
-    // res.sendFile(path.resolve(__dirname, "../views/registroUsuario.ejs"));
     res.render("registroUsuario")
 });
 

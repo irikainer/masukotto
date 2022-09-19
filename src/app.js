@@ -2,10 +2,7 @@ const express = require('express');
 const path = require('path');
 const morgan = require('morgan');
 const cookieParser = require("cookie-parser")
-    //const myConnection = require('express-myconnection')
 const multer = require('multer')
-const mysql = require('mysql2');
-//const myConnection = require('express-myconnection');
 const bodyParser = require('body-parser');
 const app = express();
 
@@ -26,14 +23,7 @@ app.set('views', path.join(__dirname, 'views'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }))
 app.use(morgan('dev'));
-// app.use(myConnection(mysql, {
-//     host: 'localhost',
-//     user: 'root',
-//     password: 'julian123',
-//     database: 'masukotto'
-// }, 'single'));
 app.use(cookieParser())
-    // routes
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
@@ -57,6 +47,8 @@ app.get('/profile/:id', function(req, res) {
 app.use('/', customerRoutes);
 app.use('/inicioSesion', customerRoutes);
 app.use('/registroUsuario', customerRoutes);
+app.use('/recuperarPassword', customerRoutes);
+
 // static files
 app.use(express.static(path.join(__dirname, 'public')));
 
