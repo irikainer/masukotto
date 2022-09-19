@@ -16,10 +16,10 @@ router.get("/recuperarPassword", (req, res) => {
 router.get("/", userSessionController.isAuthenticated, (req, res) => {
     res.render('home');
 });
-router.get('/register', function(req, res) {
+router.get('/register', function (req, res) {
     res.render('newUser');
 });
-router.get('/profile/:id', userSessionController.isAuthenticated, function(req, res) {
+router.get('/profile/', userSessionController.isAuthenticated, function (req, res) {
     res.render('profile');
 });
 
