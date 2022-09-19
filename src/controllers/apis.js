@@ -1,7 +1,7 @@
 const { base64encode, base64decode } = require("nodejs-base64");
 const connection = require("../../database/dbConn");
 const { promisify } = require("util")
-const jwt = require("jsonwebtoken")
+const jwt = require("jsonwebtoken");
 
 const controller = {};
 
@@ -76,6 +76,9 @@ controller.login = (req, res) => {
                     const userId = results[0].idUsuario;
                     const token = jwt.sign({ id: userId }, "secret");
                     console.log(`TOKEN: ${token} para el user: ${userEmail}`);
+
+                    req.session.loggedin = true;
+                    req.session.userId = userId;
 
                     const cookiesOptions = {
                         expires: new Date(Date.now() + "90" * 24 * 60 * 60 * 1000),
