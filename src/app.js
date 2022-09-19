@@ -2,14 +2,10 @@ const express = require('express');
 const path = require('path');
 const morgan = require('morgan');
 const cookieParser = require("cookie-parser")
-    // const mysql = require('mysql');
-    // const myConnection = require('express-myconnection')
-const mysql = require('mysql');
-const myConnection = require('express-myconnection')
+    //const myConnection = require('express-myconnection')
 const multer = require('multer')
-
 const mysql = require('mysql2');
-const myConnection = require('express-myconnection');
+//const myConnection = require('express-myconnection');
 const bodyParser = require('body-parser');
 const app = express();
 
@@ -38,17 +34,7 @@ app.use(morgan('dev'));
 // }, 'single'));
 app.use(cookieParser())
     // routes
-app.use('/', customerRoutes);
-app.use('/inicioSesion', customerRoutes);
-app.use('/registroUsuario', customerRoutes);
 
-app.use(myConnection(mysql, {
-    host: 'localhost',
-    user: 'root',
-    password: '',
-    port: 3308,
-    database: 'masukotto'
-}, 'single'));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(express.urlencoded({ extended: false }));
@@ -68,6 +54,9 @@ app.get('/profile/:id', function(req, res) {
     res.render('profile');
 });
 
+app.use('/', customerRoutes);
+app.use('/inicioSesion', customerRoutes);
+app.use('/registroUsuario', customerRoutes);
 // static files
 app.use(express.static(path.join(__dirname, 'public')));
 
