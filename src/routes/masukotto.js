@@ -26,13 +26,9 @@ const controller = require('../controllers/apis');
 router.get('/users', controller.usersList);
 router.get('/dayCares', controller.dayCareList);
 
-
-
 router.post("/inicioSesion", userSessionController.login);
 router.get("/logout", userSessionController.isAuthenticated, userSessionController.logout);
 router.post("/recuperarPassword", userSessionController.forget);
-
-
 
 router.post('/registerUser', userController.save);
 router.get('/profile/:id', userController.edit);
