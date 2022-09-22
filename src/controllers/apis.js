@@ -12,12 +12,6 @@ controller.usersList = (req, res) => {
     })
 }
 
-        if (err) res.json(err);
-     
-        res.render('customers', {
-            data: usuarios
-        });
- 
 
 controller.dayCareList = (req, res) => {
     connection.query('SELECT * FROM guarderias', (err, dayCares) => {
