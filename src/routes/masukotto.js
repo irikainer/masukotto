@@ -13,14 +13,12 @@ router.get("/recuperarPassword", (req, res) => {
 });
 
 router.get("/", userSessionController.isAuthenticated, (req, res) => {
-    res.render('home');
+    res.render('home', { session: req.session });
 });
-router.get('/register', function(req, res) {
+router.get('/register', function (req, res) {
     res.render('newUser');
 });
-router.get('/profile/:id', userSessionController.isAuthenticated, function(req, res) {
-    res.render('profile');
-});
+router.get('/profile/:id', userSessionController.isAuthenticated, userController.edit);
 
 
 
@@ -33,7 +31,6 @@ router.get("/users", controller.usersList);
 router.get("/dayCares", controller.dayCaresList);
 
 router.post('/registerUser', userController.save);
-router.get('/profile/:id', userController.edit);
 router.post('/update/:id', userController.update);
 const mascota = require('../controllers/mascotas');
 

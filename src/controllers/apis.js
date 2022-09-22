@@ -1,5 +1,4 @@
 const connection = require("../../database/dbConn");
-
 const controller = {};
 
 controller.usersList = (req, res) => {

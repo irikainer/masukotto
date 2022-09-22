@@ -2,7 +2,8 @@ const express = require('express');
 const path = require('path');
 const morgan = require('morgan');
 const cookieParser = require("cookie-parser");
-const multer = require('multer')
+const multer = require('multer');
+const session = require('express-session');
 const bodyParser = require('body-parser');
 const app = express();
 
@@ -14,10 +15,10 @@ app.use('/js', express.static(path.join(__dirname, '../node_modules/jquery/dist'
 const customerRoutes = require('./routes/masukotto');
 
 // settings
-app.use(express.static(__dirname + '/public'));
 app.set('port', process.env.PORT || 3000);
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
+app.use(express.static(path.join(__dirname, 'public')));
 
 // middlewares
 app.use(express.json());
@@ -32,14 +33,27 @@ app.use(multer({
     limits: { fileSize: 1000000 }
 }).single('foto'));
 
+app.use(session({
+    secret: 'secret',
+    resave: true,
+    saveUninitialized: true
+}));
+
+// routes
+app.get("/", (req, res) => {
+    res.render('home', { session: req.session });
+});
+app.get('/register', function (req, res) {
+    res.render('newUser', { session: req.session });
+});
+app.get('/profile/', function (req, res) {
+    res.render('profile', { session: req.session });
+});
 
 app.use('/', customerRoutes);
 app.use('/inicioSesion', customerRoutes);
 app.use('/register', customerRoutes);
 app.use('/profile/:id', customerRoutes);
-
-// static files
-app.use(express.static(path.join(__dirname, 'public')));
 
 app.listen(app.get('port'), () => {
     console.log('masukotto');
