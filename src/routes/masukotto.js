@@ -25,6 +25,8 @@ router.get('/profile/:id', userSessionController.isAuthenticated, userController
 const controller = require('../controllers/apis');
 router.get('/users', controller.usersList);
 router.get('/dayCares', controller.dayCareList);
+router.get('/delete/:id', controller.hideItem);
+
 
 router.post("/inicioSesion", userSessionController.login);
 router.get("/logout", userSessionController.isAuthenticated, userSessionController.logout);

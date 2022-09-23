@@ -12,7 +12,6 @@ controller.usersList = (req, res) => {
     })
 }
 
-
 controller.dayCareList = (req, res) => {
     connection.query('SELECT * FROM guarderias', (err, dayCares) => {
         if (err) res.json(err);
@@ -20,6 +19,15 @@ controller.dayCareList = (req, res) => {
         res.render('dayCares', {
             data: dayCares
         });
+    })
+}
+
+controller.hideItem = (req,res) => {
+    const {id} = req.params
+    connection.query('DELETE FROM usuarios WHERE idUsuario = ?', [id], (err, results) => {
+        if (err) res.json(err);
+
+        res.redirect('/users');
     })
 }
 

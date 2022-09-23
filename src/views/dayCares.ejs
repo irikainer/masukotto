@@ -12,26 +12,26 @@
                           <thead>
                             <tr>
                               <th scope="col">Nombre</th>
-                              <th scope="col">Apellido</th>
+                              <th scope="col">Estado</th>
                               <th scope="col">ID</th>
                               <th scope="col">Borrar</th>
                             </tr>
                           </thead>
                           <tbody>
                             <% if (data) { %>
-                                <% data.map(user => { %>
+                                <% data.map(dayCare => { %>
                                     <tr>
                                         <td>
-                                            <%= user.NombreUsuario %>
+                                            <%= dayCare.NombreGuarderia %>
                                         </td>
                                         <td>
-                                            <%= user.ApellidoUsuario %>
+                                            <%= dayCare.EstadoGuarderia %>
                                         </td>
                                         <td>
-                                            <%= user.idUsuario %>
+                                            <%= dayCare.idGuarderia %>
                                         </td>
                                         <td>
-                                            <a type="button" class="btn btn-danger btn-sm px-3" href="/delete/<%=user.idUsuario%>">
+                                            <a type="button" class="btn btn-danger btn-sm px-3" href="/delete/<%=dayCare.idGuarderia%>">
                                               <i class="fas fa-times">x</i>
                                             </a>
                                         </td>
