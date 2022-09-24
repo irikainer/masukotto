@@ -17,15 +17,30 @@ controller.dayCareList = (req, res) => {
         if (err) res.json(err);
 
         res.render('dayCares', {
-            data: dayCares
+            data: dayCares, 
+            alert: false 
         });
     })
 }
 
 controller.hideItem = (req,res) => {
     const {id} = req.params
-    connection.query('DELETE FROM usuarios WHERE idUsuario = ?', [id], (err, results) => {
-        if (err) res.json(err);
+    connection.query('DELETE FROM usuarios WHERE idUsuario = ?', [id], (err, user) => {
+        if (dayCare) {
+            console.log("Error en la query lista de guarderias")
+            res.render("customers", {
+                alert: true,
+                alertTitle: "Advertencia",
+                alertMessage: "¿Desea eliminar la guarderia?",
+                alertIcon: "info",
+                showConfirmButton: true,
+                timer: 800,
+                ruta: "customers"
+            });
+        } 
+        res.render('customers', {
+            data: user
+        });
 
         res.redirect('/users');
     })

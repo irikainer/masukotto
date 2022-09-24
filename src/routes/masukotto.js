@@ -22,6 +22,7 @@ router.get('/register', function (req, res) {
 router.get('/profile/:id', userSessionController.isAuthenticated, userController.edit);
 
 
+
 const controller = require('../controllers/apis');
 router.get('/users', controller.usersList);
 router.get('/dayCares', controller.dayCareList);
