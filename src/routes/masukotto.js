@@ -16,7 +16,7 @@ router.get("/", userSessionController.isAuthenticated, (req, res) => {
     res.render('home', { session: req.session });
 });
 router.get('/register', function (req, res) {
-    res.render('newUser');
+    res.render('newUser', {alert: false});
 });
 router.get('/profile/:id', userSessionController.isAuthenticated, userController.edit);
 

@@ -5,16 +5,8 @@ userController.save = (req, res) => {
     const data = Object.values(req.body);
     connection.query(`INSERT INTO usuarios (idTipoUsuario, NombreUsuario, ApellidoUsuario, MailUsuario, PassUsuario, TelefonoUsuario, ProvinciaUsuario, LocalidadUsuario, CPUsuario, DomCalleUsuario, DomNumUsuario, DomPisoDptoUsuario, EstadoUsuario) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 'Activo')`, data,
         (err, customer) => {
-            res.render('inicioSesion', {
-                alert: true,
-                alertTitle: "Usuario registrado con éxito",
-                alertMessage: "Iniciá sesión para comenzar",
-                alertIcon: "success",
-                showConfirmButton: true,
-                timer: false,
-                ruta: "inicioSesion"
-            });
             if (err) {
+                console.log(err)
                 res.render("newUser", {
                     alert: true,
                     alertTitle: "Error",
@@ -23,6 +15,16 @@ userController.save = (req, res) => {
                     showConfirmButton: true,
                     timer: false,
                     ruta: "register"
+                });
+            } else {
+                res.render('inicioSesion', {
+                    alert: true,
+                    alertTitle: "Usuario registrado con éxito",
+                    alertMessage: "Iniciá sesión para comenzar",
+                    alertIcon: "success",
+                    showConfirmButton: true,
+                    timer: false,
+                    ruta: "inicioSesion"
                 });
             }
         })
