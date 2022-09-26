@@ -7,7 +7,8 @@ controller.usersList = (req, res) => {
             res.json(err);
         }
         res.render('customers', {
-            data: usuarios
+            data: usuarios,
+            session: req.session 
         });
     })
 }
@@ -18,8 +19,27 @@ controller.dayCaresList = (req, res) => {
             res.json(err);
         }
         res.render('dayCares', {
-            data: daycares
+            data: daycares,
+            session: req.session 
         });
+    })
+}
+
+controller.hideUsers = (req,res) => {
+    const {id} = req.params
+    connection.query('DELETE FROM usuarios WHERE idUsuario = ?', [id], (err, user) => {
+        if (user) {
+            res.redirect('/users');
+        }
+    })
+}
+
+controller.hideDayCares = (req,res) => {
+    const {id} = req.params
+    connection.query('DELETE FROM guarderias WHERE idGuarderia = ?', [id], (err, dayCare) => {
+        if (dayCare) {
+            res.redirect('/dayCares');
+        }
     })
 }
 
