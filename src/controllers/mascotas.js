@@ -35,7 +35,19 @@ mascota.add = (req, res) => {
 
 
     //console.log(req.file.filename);
-    res.redirect('/');
+    res.render('mascotas', { session: req.session, data: listaMascotas });
 }
+
+mascota.update = (req, res) => {
+    const { id } = req.params;
+    console.log(req.params)
+    connection.query('SELECT f.RutaFoto, f.DescripcionFoto, m.idMascota, m.idUsuario, m.NombreMascota, m.EspecieMascota, m.RazaMascota, m.AnioNacimientoMascota, m.AlimentoMascota, m.EnfermedadesMascota, m.VetNombreMascota, m.EstadoMascota FROM masukotto.mascotas m LEFT JOIN masukotto.fotos f ON m.idMascota = f.idMascota AND EstadoFoto = 1 AND DescripcionFoto = "PERFIL" WHERE m.idMascota = ?', [id],
+        (err, listaMascotas) => {
+            if (err) {
+                console.log(err);
+            }
+            res.render('mascotas', { session: req.session, data: listaMascotas });
+        })
+};
 
 module.exports = mascota;
