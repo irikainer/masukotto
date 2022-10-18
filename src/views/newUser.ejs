@@ -1,4 +1,5 @@
 <%- include('partials/header') %>
+    <%- include('partials/navbar') %>
         <div class="d-flex justify-content-center">
             <div class="card mt-5 w-75 mb-5">
                 <div class="card-body">
@@ -7,15 +8,13 @@
                     <form action="/registerUser" method="POST" id="registerForm" class="needs-validation" novalidate>
                         <div class="d-flex justify-content-around mb-3">
                             <div class="form-check">
-                                <input class="form-check-input" type="radio" name="idTipoUsuario" value="0"
-                                    id="tipoUsuario" checked>
+                                <input class="form-check-input" type="radio" name="idTipoUsuario" value="0" id="tipoUsuario" checked>
                                 <label class="form-check-label" for="tipoUsuario">
                                     Usuario
                                 </label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="radio" name="idTipoUsuario" value="1"
-                                    id="tipoGuarderia">
+                                <input class="form-check-input" type="radio" name="idTipoUsuario" value="1" id="tipoGuarderia">
                                 <label class="form-check-label" for="tipoGuarderia">
                                     Guardería
                                 </label>
@@ -63,8 +62,7 @@
                         </div> -->
                         <div class="mb-3 has-validation">
                             <label for="TelefonoUsuario">Teléfono</label>
-                            <input type="number" class="form-control" name="TelefonoUsuario" id="TelefonoUsuario"
-                                required>
+                            <input type="number" class="form-control" name="TelefonoUsuario" id="TelefonoUsuario" required>
                             <div class="invalid-feedback">
                                 Este campo es obligatorio.
                             </div>
@@ -130,7 +128,7 @@
                 'use strict'
                 // Fetch all the forms we want to apply custom Bootstrap validation styles to
                 const forms = document.querySelectorAll('.needs-validation')
-                // Loop over them and prevent submission
+                    // Loop over them and prevent submission
                 Array.from(forms).forEach(form => {
                     form.addEventListener('submit', event => {
                         if (!form.checkValidity()) {

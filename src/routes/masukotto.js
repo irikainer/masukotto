@@ -5,6 +5,7 @@ const userController = require('../controllers/user');
 const userSessionController = require('../controllers/userSession');
 const mascota = require('../controllers/mascotas');
 
+
 router.get("/inicioSesion", (req, res) => {
     res.render("inicioSesion", { alert: false })
 });

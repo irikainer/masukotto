@@ -5,6 +5,8 @@ const cookieParser = require("cookie-parser");
 const multer = require('multer');
 const session = require('express-session');
 const bodyParser = require('body-parser');
+/* const bootstrap = require('bootstrap');
+const popper = require('popper'); */
 const app = express();
 
 app.use('/css', express.static(path.join(__dirname, '../node_modules/bootstrap/dist/css')));

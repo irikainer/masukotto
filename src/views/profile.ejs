@@ -5,21 +5,18 @@
                 <div class="card-body">
                     <h5 class="card-title display-5 text-center">Mi perfil</h5>
                     <br>
-                    <form action="/update/<%= data.idUsuario %>" method="POST" id="registerForm"
-                        class="needs-validation" novalidate>
+                    <form action="/update/<%= data.idUsuario %>" method="POST" id="registerForm" class="needs-validation" novalidate>
                         <div class="row">
                             <div class="mb-3 col has-validation">
                                 <label for="NombreUsuario">Nombre</label>
-                                <input class="form-control" name="NombreUsuario" id="NombreUsuario" required
-                                    value="<%= data.NombreUsuario %>">
+                                <input class="form-control" name="NombreUsuario" id="NombreUsuario" required value="<%= data.NombreUsuario %>">
                                 <div class="invalid-feedback">
                                     Este campo es obligatorio.
                                 </div>
                             </div>
                             <div class="mb-3 col has-validation">
                                 <label for="ApellidoUsuario">Apellido</label>
-                                <input class="form-control" name="ApellidoUsuario" id="ApellidoUsuario" required
-                                    value="<%= data.ApellidoUsuario %>">
+                                <input class="form-control" name="ApellidoUsuario" id="ApellidoUsuario" required value="<%= data.ApellidoUsuario %>">
                             </div>
                             <div class="invalid-feedback">
                                 Este campo es obligatorio.
@@ -28,16 +25,14 @@
 
                         <div class="mb-3 has-validation">
                             <label for="MailUsuario">E-mail</label>
-                            <input type="email" class="form-control" name="MailUsuario" id="MailUsuario" required
-                                value="<%= data.MailUsuario %>">
+                            <input type="email" class="form-control" name="MailUsuario" id="MailUsuario" required value="<%= data.MailUsuario %>">
                             <div class="invalid-feedback">
                                 Este campo es obligatorio.
                             </div>
                         </div>
                         <div class="mb-3 has-validation">
                             <label for="TelefonoUsuario">Teléfono</label>
-                            <input type="number" class="form-control" name="TelefonoUsuario" id="TelefonoUsuario"
-                                required value="<%= data.TelefonoUsuario %>">
+                            <input type="number" class="form-control" name="TelefonoUsuario" id="TelefonoUsuario" required value="<%= data.TelefonoUsuario %>">
                             <div class="invalid-feedback">
                                 Este campo es obligatorio.
                             </div>
@@ -58,8 +53,7 @@
 
                             <div class="mb-3 col-2 has-validation">
                                 <label for="CPUsuario">Código postal</label>
-                                <input class="form-control" name="CPUsuario" id="CPUsuario"
-                                    value="<%= data.CPUsuario %>" required>
+                                <input class="form-control" name="CPUsuario" id="CPUsuario" value="<%= data.CPUsuario %>" required>
                                 <div class="invalid-feedback">
                                     Este campo es obligatorio.
                                 </div>
@@ -68,24 +62,21 @@
                         <div class="row">
                             <div class="mb-3 col-6 has-validation">
                                 <label for="DomCalleUsuario">Calle</label>
-                                <input class="form-control" name="DomCalleUsuario" id="DomCalleUsuario" required
-                                    value="<%= data.DomCalleUsuario %>">
+                                <input class="form-control" name="DomCalleUsuario" id="DomCalleUsuario" required value="<%= data.DomCalleUsuario %>">
                                 <div class="invalid-feedback">
                                     Este campo es obligatorio.
                                 </div>
                             </div>
                             <div class="mb-3 col-3">
                                 <label for="DomNumUsuario has-validation">Número</label>
-                                <input class="form-control" name="DomNumUsuario" id="DomNumUsuario" required
-                                    value="<%= data.DomNumUsuario %>">
+                                <input class="form-control" name="DomNumUsuario" id="DomNumUsuario" required value="<%= data.DomNumUsuario %>">
                                 <div class="invalid-feedback">
                                     Este campo es obligatorio.
                                 </div>
                             </div>
                             <div class="mb-3 col-3">
                                 <label for="DomPisoDptoUsuario">Piso/Depto</label>
-                                <input class="form-control" name="DomPisoDptoUsuario" id="DomPisoDptoUsuario"
-                                    value="<%= data.DomPisoDptoUsuario %>">
+                                <input class="form-control" name="DomPisoDptoUsuario" id="DomPisoDptoUsuario" value="<%= data.DomPisoDptoUsuario %>">
                             </div>
                         </div>
                         <div class="d-flex justify-content-center mt-3">
@@ -97,13 +88,13 @@
                 </div>
             </div>
         </div>
-        </body>
+        <!--      </body> -->
         <script>
             (() => {
                 'use strict'
                 // Fetch all the forms we want to apply custom Bootstrap validation styles to
                 const forms = document.querySelectorAll('.needs-validation')
-                // Loop over them and prevent submission
+                    // Loop over them and prevent submission
                 Array.from(forms).forEach(form => {
                     form.addEventListener('submit', event => {
                         if (!form.checkValidity()) {
@@ -117,4 +108,4 @@
             })()
         </script>
 
-        </html>
+        <%- include ("partials/_footer") %>
