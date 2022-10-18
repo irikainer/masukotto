@@ -42,21 +42,21 @@ mascota.update = (req, res) => {
     const { id } = req.params;
     const updpet = req.body;
     console.log(updpet)
-    connection.query('UPDATE masukotto.mascotas SET NombreMascota = ?, AlimentoMascota = ?, EnfermedadesMascota, VetNombreMascota WHERE m.idMascota = ?', [updpet, id],
-        (err, updatapet) => {
-            if (err) {
-                console.log(err);
-            }
-            console.log('Update de datos OK');
-        })
-    connection.query('UPDATE masukotto.fotos SET RutaFoto = ?  WHERE idFoto = ?', [updpet, id],
-            (err, updphpet) => {
+    connection.query('UPDATE masukotto.mascotas SET ? WHERE idMascota = ?', [updpet, id],
+            (err, updatapet) => {
                 if (err) {
                     console.log(err);
                 }
-                console.log('Update de Foto OK');
+                console.log('Update de datos OK');
             })
-        //res.redirect(req.get('referer'));
+        /*     connection.query('UPDATE masukotto.fotos SET RutaFoto = ?  WHERE idFoto = ?', [updpet, id],
+                    (err, updphpet) => {
+                        if (err) {
+                            console.log(err);
+                        }
+                        console.log('Update de Foto OK');
+                    }) */
+    res.redirect(req.get('referer'));
 
     //console.log(req.file.filename);
 
