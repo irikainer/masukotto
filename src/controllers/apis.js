@@ -7,7 +7,8 @@ controller.usersList = (req, res) => {
             res.json(err);
         }
         res.render('customers', {
-            data: usuarios
+            data: usuarios,
+            session: req.session
         });
     })
 }
@@ -17,14 +18,14 @@ controller.dayCareList = (req, res) => {
         if (err) res.json(err);
 
         res.render('dayCares', {
-            data: dayCares, 
-            alert: false 
+            data: dayCares,
+            alert: false
         });
     })
 }
 
-controller.hideItem = (req,res) => {
-    const {id} = req.params
+controller.hideItem = (req, res) => {
+    const { id } = req.params
     connection.query('DELETE FROM usuarios WHERE idUsuario = ?', [id], (err, user) => {
         if (dayCare) {
             console.log("Error en la query lista de guarderias")
@@ -37,7 +38,7 @@ controller.hideItem = (req,res) => {
                 timer: 800,
                 ruta: "customers"
             });
-        } 
+        }
         res.render('customers', {
             data: user
         });

@@ -1,53 +1,53 @@
 <%- include('partials/header') %>
-    <section class="intro">
-        <div class="bg-image h-100" style="background-color: #6095F0;">
-          <div class="mask d-flex align-items-center h-100">
-            <div class="container">
-              <div class="row justify-content-center">
-                <div class="col-12">
-                  <div class="card shadow-2-strong" style="background-color: #f5f7fa;">
-                    <div class="card-body">
-                      <div class="table-responsive">
-                        <table class="table table-borderless mb-0">
-                          <thead>
+  <section class="intro">
+    <div class="bg-image h-100" style="background-color: #6095F0;">
+      <div class="mask d-flex align-items-center h-100">
+        <div class="container">
+          <div class="row justify-content-center">
+            <div class="col-12">
+              <div class="card shadow-2-strong" style="background-color: #f5f7fa;">
+                <div class="card-body">
+                  <div class="table-responsive">
+                    <table class="table table-borderless mb-0">
+                      <thead>
+                        <tr>
+                          <th scope="col">Nombre</th>
+                          <th scope="col">Apellido</th>
+                          <th scope="col">ID</th>
+                          <th scope="col">Borrar</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <% if (data) { %>
+                          <% data.map(user=> { %>
                             <tr>
-                              <th scope="col">Nombre</th>
-                              <th scope="col">Apellido</th>
-                              <th scope="col">ID</th>
-                              <th scope="col">Borrar</th>
+                              <td>
+                                <%= user.NombreUsuario %>
+                              </td>
+                              <td>
+                                <%= user.ApellidoUsuario %>
+                              </td>
+                              <td>
+                                <%= user.idUsuario %>
+                              </td>
+                              <td>
+                                <a type="button" class="btn btn-danger btn-sm px-3" href="/delete/<%=user.idUsuario%>">
+                                  <i class="fas fa-times">x</i>
+                                </a>
+                              </td>
                             </tr>
-                          </thead>
-                          <tbody>
-                            <% if (data) { %>
-                                <% data.map(user => { %>
-                                    <tr>
-                                        <td>
-                                            <%= user.NombreUsuario %>
-                                        </td>
-                                        <td>
-                                            <%= user.ApellidoUsuario %>
-                                        </td>
-                                        <td>
-                                            <%= user.idUsuario %>
-                                        </td>
-                                        <td>
-                                            <a type="button" class="btn btn-danger btn-sm px-3" href="/delete/<%=user.idUsuario%>">
-                                              <i class="fas fa-times">x</i>
-                                            </a>
-                                        </td>
-                                    </tr>
-                                    <% }) %>
-                                        <% } %>
-                          </tbody>
-                        </table>
-                      </div>
-                    </div>
+                            <% }) %>
+                              <% } %>
+                      </tbody>
+                    </table>
                   </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
-      </section>
- 
-    </html>
+      </div>
+    </div>
+  </section>
+
+  </html>

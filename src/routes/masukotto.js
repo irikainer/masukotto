@@ -4,7 +4,6 @@ const router = express.Router();
 const userController = require('../controllers/user');
 const userSessionController = require('../controllers/userSession');
 
-
 router.get("/inicioSesion", (req, res) => {
     res.render("inicioSesion", { alert: false })
 });
@@ -17,21 +16,21 @@ router.get("/", userSessionController.isAuthenticated, (req, res) => {
     res.render('home', { session: req.session });
 });
 router.get('/register', function (req, res) {
-    res.render('newUser');
+    res.render('newUser', { alert: false });
 });
 router.get('/profile/:id', userSessionController.isAuthenticated, userController.edit);
 
 
 
-const controller = require('../controllers/apis');
-router.get('/users', controller.usersList);
-router.get('/dayCares', controller.dayCareList);
-router.get('/delete/:id', controller.hideItem);
-
-
 router.post("/inicioSesion", userSessionController.login);
 router.get("/logout", userSessionController.isAuthenticated, userSessionController.logout);
 router.post("/recuperarPassword", userSessionController.forget);
+
+const controller = require('../controllers/apis');
+router.get("/users", controller.usersList);
+router.get("/dayCares", controller.dayCaresList);
+router.get('/deleteUser/:id', controller.hideUsers);
+router.get('/deleteDayCare/:id', controller.hideDayCares);
 
 router.post('/registerUser', userController.save);
 router.get('/profile/:id', userController.edit);
