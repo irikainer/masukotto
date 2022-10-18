@@ -16,14 +16,14 @@ router.get("/", userSessionController.isAuthenticated, (req, res) => {
     res.render('home', { session: req.session });
 });
 router.get('/register', function (req, res) {
-    res.render('newUser', {alert: false});
+    res.render('newUser', { alert: false });
 });
 router.get('/profile/:id', userSessionController.isAuthenticated, userController.edit);
 
 
 
-router.post("/inicioSesion", userSessionController.login);
 router.get("/logout", userSessionController.isAuthenticated, userSessionController.logout);
+router.post("/inicioSesion", userSessionController.login);
 router.post("/recuperarPassword", userSessionController.forget);
 
 const controller = require('../controllers/apis');

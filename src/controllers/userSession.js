@@ -67,7 +67,15 @@ userSessionController.login = (req, res) => {
 
 userSessionController.logout = (req, res) => {
     res.clearCookie("jwt");
-    return res.redirect("/inicioSesion")
+    res.render("inicioSesion", {
+        alert: true,
+        alertTitle: "Éxito",
+        alertMessage: "¡Se ha desconectado exitosamente!",
+        alertIcon: "success",
+        showConfirmButton: false,
+        timer: 1000,
+        ruta: "inicioSesion"
+    });
 }
 
 userSessionController.forget = (req, res) => {
