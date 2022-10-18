@@ -1,0 +1,85 @@
+.image {
+    position: relative;
+    overflow: hidden;
+    padding-bottom: 100%;
+}
+
+.image img {
+    position: absolute;
+}
+
+.thumb-post img {
+    object-fit: none;
+    /* Do not scale the image */
+    object-position: center;
+    /* Center the image within the element */
+    width: 100%;
+    max-height: 200px;
+    margin-bottom: 1rem;
+}
+
+.crop {
+    width: 150px;
+    height: 150px;
+    overflow: hidden;
+}
+
+.crop img {
+    /*object-fit: none;*/
+    /* width: 150px;
+    height: 150px; */
+    width: 100%;
+    /*height: 150px;*/
+    overflow: hidden;
+    object-position: center;
+    background-position: center center;
+    background-repeat: no-repeat;
+    /* margin: -75px 0 0 -100px; */
+}
+
+.petprofile :hover {
+    background: #f6f6f6;
+    /*border-radius: 75px;*/
+}
+
+.petadd :hover {
+    background: #3b6fc9
+}
+
+.center-cropped {
+    width: 100px;
+    height: 100px;
+    background-position: center center;
+    background-repeat: no-repeat;
+}
+
+.wrap {
+    -webkit-flex-wrap: wrap;
+    flex-wrap: wrap;
+}
+
+.wrap li {
+    background: gold;
+}
+
+.wrap-reverse {
+    -webkit-flex-wrap: wrap-reverse;
+    flex-wrap: wrap-reverse;
+}
+
+.wrap-reverse li {
+    background: deepskyblue;
+}
+
+.flex-item {
+    background: tomato;
+    padding: 5px;
+    width: 100px;
+    height: 100px;
+    margin: 10px;
+    line-height: 100px;
+    color: white;
+    font-weight: bold;
+    font-size: 2em;
+    text-align: center;
+}

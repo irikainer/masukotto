@@ -28,9 +28,11 @@ app.use(cookieParser())
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+
 app.use(multer({
     dest: path.join(__dirname, 'public/uploads'),
-    limits: { fileSize: 1000000 }
+    limits: { fileSize: 1000000 },
+    filename: function(req, foto, cb) { cb(null, foto.fieldname + "-" + Date.now() + path.extname(foto.originalname)) }
 }).single('foto'));
 
 app.use(session({
@@ -38,15 +40,15 @@ app.use(session({
     resave: true,
     saveUninitialized: true
 }));
-
+/* app.use(express.static(__dirname + '/public')); */
 // routes
 app.get("/", (req, res) => {
     res.render('home', { session: req.session });
 });
-app.get('/register', function (req, res) {
+app.get('/register', function(req, res) {
     res.render('newUser', { session: req.session });
 });
-app.get('/profile/', function (req, res) {
+app.get('/profile/', function(req, res) {
     res.render('profile', { session: req.session });
 });
 
