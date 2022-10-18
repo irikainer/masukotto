@@ -32,5 +32,7 @@ router.post('/update/:id', userController.update);
 router.get('/');
 router.get('/mascotas/:id', userSessionController.isAuthenticated, mascota.list);
 router.post('/mascotas/:id/petadd', userSessionController.isAuthenticated, mascota.add);
+router.post('/mascotas/petupdate/:id', userSessionController.isAuthenticated, mascota.update);
+//router.post('/mascotas/petdelete/:id', userSessionController.isAuthenticated, mascota.delete);
 
 module.exports = router;
