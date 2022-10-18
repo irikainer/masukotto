@@ -10,17 +10,23 @@
                 <a class="nav-link fw-semibold" href="/">Home</a>
                 <a class="nav-link fw-semibold" href="#">¿Quiénes somos?</a>
                 <a class="nav-link fw-semibold" href="#">Contacto</a>
-                <% if (session.loggedin) { %>
-                    <button type="button" class="btn btn-warning fw-semibold">
-                        <a href="/profile/<%= session.userId %>" class="text-decoration-none text-reset">Mi
-                            perfil</a></button>
-                    <button type="button" class="btn btn-danger fw-semibold">
-                        <a type="button" class="text-decoration-none text-reset" href="/logout">Desconectar</a>
-                    </button>
-                    <%} else { %>
-                        <button type="button" class="btn btn-warning fw-semibold">
-                            <a href="/inicioSesion" class="text-decoration-none text-reset">Iniciar sesión</a></button>
-                        <% }%>
+                <% if (session.typeUser===1) { %>
+                    <button type="button" class="btn btn-info fw-semibold">
+                        <a class="text-decoration-none text-reset" href="/users">Usuarios</a></button>
+                    <% }%>
+                        <% if (session.loggedin) { %>
+                            <button type="button" class="btn btn-warning fw-semibold">
+                                <a href="/profile/<%= session.userId %>" class="text-decoration-none text-reset">Mi
+                                    perfil</a></button>
+                            <button type="button" class="btn btn-danger fw-semibold">
+                                <a type="button" class="text-decoration-none text-reset" href="/logout">Desconectar</a>
+                            </button>
+                            <%} else { %>
+                                <button type="button" class="btn btn-warning fw-semibold">
+                                    <a href="/inicioSesion" class="text-decoration-none text-reset">Iniciar
+                                        sesión</a></button>
+                                <% }%>
+
             </div>
         </div>
     </div>
