@@ -14,34 +14,28 @@
                         <a class="text-decoration-none text-reset" href="/users">Usuarios</a></button>
                     <% }%>
                         <% if (session.loggedin) { %>
-                            <button type="button" class="btn btn-warning fw-semibold">
-                                <a href="/mascotas/<%= session.userId %>" class="text-decoration-none text-reset">Mis
-                                    Mascotas</a></button>
-                            <button type="button" class="btn btn-warning fw-semibold">
-                                <a href="/profile/<%= session.userId %>" class="text-decoration-none text-reset">Mi
-                                    perfil</a></button>
-                            <button type="button" class="btn btn-danger fw-semibold">
-                                <a type="button" class="text-decoration-none text-reset" href="/logout">Desconectar</a>
-                            </button>
+
                             <div class="dropdown">
-                                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                  Dropdown button
+                                <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                  Usuario
                                 </button>
                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                    <a class="dropdown-item" data-toggle="tab" href="#">Action</a>
-                                    <a class="dropdown-item" data-toggle="tab" href="#">Another action</a>
-                                    <a class="dropdown-item" data-toggle="tab" href="#">Something else here</a>
+                                    <a class="dropdown-item" href="/profile/<%= session.userId %>">Modificar Perfil</a>
+                                    <a class="dropdown-item" href="<%='/mascotas/'+session.userId %>">Mis Mascotas</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="/logout">Cerrar Sesion</a>
                                 </div>
                             </div>
-                            <%} else { %>
-                                <button type="button" class="btn btn-warning fw-semibold">
+            </div>
+            <%} else { %>
+                <button type="button" class="btn btn-warning fw-semibold">
                                     <a href="/inicioSesion" class="text-decoration-none text-reset">Iniciar
                                         sesión</a></button>
-                                <% }%>
+                <% }%>
 
 
 
-            </div>
         </div>
+    </div>
     </div>
 </nav>
