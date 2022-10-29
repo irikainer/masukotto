@@ -29,7 +29,7 @@ router.post("/inicioSesion", userSessionController.login);
 router.post("/recuperarPassword", userSessionController.forget);
 
 const controller = require('../controllers/apis');
-router.get("/users", controller.usersList);
+router.get("/users", userSessionController.isAuthenticated, controller.usersList);
 router.get("/dayCares", controller.dayCaresList);
 router.get('/deleteUser/:id', controller.hideUsers);
 router.get('/deleteDayCare/:id', controller.hideDayCares);
