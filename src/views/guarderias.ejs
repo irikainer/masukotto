@@ -5,7 +5,7 @@
             <div class="card">
                 <div class="card-body mt-5">
                     <% if (data.length == 0) {%>
-                        <h1 class="text-center">Pasanos los datos de tus mascotas!</h1>
+                        <h1 class="text-center">Cargá tu Guarderia</h1>
                         <% }else { %>
                             <div class="container">
                                 <div class="row">
@@ -17,22 +17,30 @@
                                                         <div class="crop rounded border" style="background-color: white;">
                                                             <% if(!data[i].RutaFoto){data[i].RutaFoto='phdog.jpg'} %>
 
-                                                                <a data-toggle="modal" href="<%='#petno'+data[i].idMascota %>"><img src="<%='../uploads/'+data[i].RutaFoto%>" alt="mascota" class="img"></a>
+                                                                <a data-toggle="modal" href="<%='#careno'+data[i].idGuarderia %>"><img src="<%='../uploads/'+data[i].RutaFoto%>" alt="guarderia" class="img"></a>
                                                         </div>
                                                     </div>
                                                     <div class="col-7 mt-1">
                                                         <h5>
-                                                            <a data-toggle="modal" class="stretched-link " href="<%='#petno'+data[i].idMascota %>" style="color:#343a40;text-decoration: none;">
-                                                                <%= data[i].NombreMascota %>
+                                                            <a data-toggle="modal" class="stretched-link " href="<%='#careno'+data[i].idGuarderia %>" style="color:#343a40;text-decoration: none;">
+                                                                <%= data[i].NombreGuarderia %>
                                                             </a>
                                                         </h5>
-                                                        <p style="font-family: Verdana;"><b>Especie: </b>
-                                                            <%= data[i].EspecieMascota %>
+                                                        <p style="font-family: Verdana;">
+                                                            <%= data[i].LocalidadGuarderia+', '+data[i].ProvinciaGuarderia %>
                                                                 <br>
-                                                                <b>Raza: </b>
-                                                                <%= data[i].RazaMascota %>
+                                                                <b>Lugares Disponibles: </b>
+                                                                <%= data[i].LugaresDisponibles+' de '+data[i].LugaresGuarderia %>
                                                                     <br>
-                                                                    <b><%=new Date().getFullYear()-parseInt(data[i].AnioNacimientoMascota) %> años</b>
+                                                                    <b>Puntaje: </b>
+                                                                    <%=data[i].CalificacionGuarderia+'/10'%>
+                                                                        <br>
+                                                                        <b>Estado: </b>
+                                                                        <%if (data[i].LugaresDisponibles == 0){%>
+                                                                            Sin lugares disponibles
+                                                                            <%}else{%>
+                                                                                <%=data[i].EstadoGuarderia%>
+                                                                                    <%}%>
 
                                                         </p>
                                                     </div>
@@ -52,7 +60,7 @@
                                                                 </div>
                                                                 <div class="col-7">
                                                                     <h5><br><br>
-                                                                        <a class="stretched-link" data-toggle="modal" href="#AltaMascota"></a> Agregar Mascota
+                                                                        <a class="stretched-link" data-toggle="modal" href="#AltaGuarderia"></a> Agregar Guarderia
 
                                                                     </h5>
 
@@ -61,15 +69,15 @@
                                                         </div>
 
                                 </div>
-                                <!-- FORMULARIO DE AGREGADO DE MASCOTA -->
+                                <!-- FORMULARIO DE AGREGADO DE GUARDERIA -->
 
 
                                 <!-- Modal -->
-                                <div class="modal fade bd-example-modal-lg" id="AltaMascota" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                <div class="modal fade bd-example-modal-lg" id="AltaGuarderia" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                     <div class="modal-dialog modal-lg" role="document">
                                         <div class="modal-content">
                                             <div class="modal-header">
-                                                <h5 class="modal-title" id="exampleModalLongTitle">Datos de tu Mascota!</h5>
+                                                <h5 class="modal-title" id="exampleModalLongTitle">Datos de tu Guarderia</h5>
                                                 <button type="button" class="btn btn-light" data-dismiss="modal" aria-label="Close">
                                             <span aria-hidden="true">X</span>
                                         </button>
@@ -78,62 +86,95 @@
                                                 <div class="container-fluid">
                                                     <div class="row">
                                                         <div class="col-md-6">
-                                                            <form action="/mascotas/<%= session.userId %>/petadd" method="post" enctype="multipart/form-data">
-                                                                <label for="NombreMascota">Nombre(*)</label>
-                                                                <input type="text" name="NombreMascota" class="form-control">
+                                                            <form action="/guarderias/<%= session.userId %>/careadd" method="post" enctype="multipart/form-data">
+                                                                <label for="NombreGuarderia">Nombre(*)</label>
+                                                                <input type="text" name="NombreGuarderia" class="form-control">
                                                         </div>
                                                         <div class="col-md-6">
                                                             <div class="form-group">
-                                                                <label for="EspecieMascota">Especie(*)</label>
-                                                                <select type="text" name="EspecieMascota" class="form-control">
-                                                                <option value="Perro">Perro</option>    
-                                                                <option value="Gato">Gato</option>    
-                                                                <option value="Lagarto/Vivora">Lagarto/Vivora</option>    
-                                                                <option value="Roedor">Roedor</option>
-                                                                <option value="Ave">Ave</option>
+                                                                <label for="MascEspecieGuarderia">Especie(*)</label>
+                                                                <select type="text" name="MascEspecieGuarderia" class="form-control">
+                                                                <option value="Perros">Perro</option>    
+                                                                <option value="Gatos">Gato</option>    
+                                                                <option value="Ambos">Ambos</option>    
                                                             </select>
                                                             </div>
                                                         </div>
                                                     </div>
                                                     <div class="row">
                                                         <div class="col-md-4">
-                                                            <label for="RazaMascota">Raza(*)</label>
-                                                            <input type="text" name="RazaMascota" class="form-control">
+                                                            <div class="form-group">
+                                                                <label for="TipoGuarderia">Tipo de Guarderia(*)</label>
+                                                                <select type="text" name="TipoGuarderia" class="form-control">
+                                                                <option value="Solo de día">Solo de día</option>    
+                                                                <option value="Alojamiento">Alojamiento</option>    
+                                                                
+                                                            </select>
+                                                            </div>
                                                         </div>
                                                         <div class="col-md-4">
-                                                            <label for="AnioNacimientoMascota">Año de Nacimiento</label>
-                                                            <input type="text" name="AnioNacimientoMascota" class="form-control">
+                                                            <div class="form-group">
+                                                                <label for="MascTalleGuarderia">Permite Animales(*)</label>
+                                                                <select type="text" name="MascTalleGuarderia" class="form-control">
+                                                                <option value="Pequeños">Pequeños</option>    
+                                                                <option value="Medianos">Medianos</option>    
+                                                                <option value="Grandes">Grandes</option>  
+                                                            </select>
+                                                            </div>
+                                                            <!--  -->
                                                         </div>
                                                         <div class="col-md-4">
-                                                            <label for="AlimentoMascota">Alimento</label>
-                                                            <input type="text" name="AlimentoMascota" class="form-control">
+                                                            <label for="LugaresGuarderia">Cantidad de Lugares</label>
+                                                            <input type="text" name="LugaresGuarderia" class="form-control">
                                                         </div>
                                                     </div>
 
                                                     <div class="row">
                                                         <div class="col-md-6">
-                                                            <label for="EnfermedadesMascota">Enfermedades</label>
-                                                            <textarea name="EnfermedadesMascota" rows="3" class="form-control"></textarea>
+                                                            <label for="DescripcionGuarderia">Descripcion de Guarderia</label>
+                                                            <textarea name="DescripcionGuarderia" rows="3" class="form-control"></textarea>
 
                                                         </div>
                                                     </div>
                                                     <div class="row">
-                                                        <h5>Datos de tu Veterinario</h5>
+                                                        <h5>Datos del Domicilio</h5>
 
                                                     </div>
                                                     <div class="row">
                                                         <div class="col-md-6">
-                                                            <label for="VetNombreMascota">Nombre de tu Veterinario</label>
-                                                            <input type="text" name="VetNombreMascota" class="form-control">
+                                                            <label for="DomCalleGuarderia">Calle(*)</label>
+                                                            <input type="text" name="DomCalleGuarderia" class="form-control">
                                                         </div>
                                                         <div class="col-md-6">
-                                                            <label for="VetTelMascota">Telefono de tu Veterinario</label>
-                                                            <input type="text" name="VetTelMascota" class="form-control">
+                                                            <label for="DomNumeroGuarderia">Número(*)</label>
+                                                            <input type="text" name="" DomNumeroGuarderia " class="form-control ">
+                                                        </div>
+                                                        <div class="col-md-6 ">
+                                                            <label for="DomPisoDptoGuarderia ">Piso & Dpto</label>
+                                                            <input type="text " name=" "DomPisoDptoGuarderia" class="form-control">
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-md-6">
+                                                            <label for="LocalidadGuarderia">Localidad(*)</label>
+                                                            <input type="text" name="LocalidadGuarderia" class="form-control">
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <label for="ProvinciaGuarderia">Provincia(*)</label>
+                                                            <input type="text" name="ProvinciaGuarderia" class="form-control">
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <label for="CPGuarderia">Código Postal(*)</label>
+                                                            <input type="text" name="CPGuarderia" class="form-control">
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <label for="TelGuarderia">Telefono(*)</label>
+                                                            <input type="text" name="TelGuarderia" class="form-control">
                                                         </div>
                                                     </div>
                                                     <div class="row">
                                                         <div class="form-group mt-3 mb-3">
-                                                            <label for="foto">Foto de Perfil de tu mascota</label>
+                                                            <label for="foto">Foto de Perfil de la Guarderia(*)</label>
                                                             <input type="file" class="form-control-file" name="foto">
                                                         </div>
                                                     </div>

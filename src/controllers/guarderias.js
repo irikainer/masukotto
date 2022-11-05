@@ -1,31 +1,31 @@
-const mascota = {};
+const guarderia = {};
 const connection = require("../../database/dbConn");
 
-mascota.list = (req, res) => {
+guarderia.list = (req, res) => {
     const { id } = req.params;
     console.log(req.params)
-    connection.query('SELECT f.RutaFoto, f.DescripcionFoto, m.idMascota, m.idUsuario, m.NombreMascota, m.EspecieMascota, m.RazaMascota, m.AnioNacimientoMascota, m.AlimentoMascota, m.EnfermedadesMascota, m.VetNombreMascota, m.EstadoMascota FROM masukotto.mascotas m LEFT JOIN masukotto.fotos f ON m.idMascota = f.idMascota AND EstadoFoto = 1 AND DescripcionFoto = "PERFIL" WHERE m.idUsuario = ? AND EstadoMascota = "Activa"', [id],
-        (err, listaMascotas) => {
+    connection.query('SELECT f.RutaFoto, f.DescripcionFoto, g.idGuarderia, g.idUsuario, g.NombreGuarderia, g.TelGuarderia, g.ProvinciaGuarderia, g.LocalidadGuarderia, g.CPGuarderia, g.DomCalleGuarderia, g.DomNumeroGuarderia, g.DomPisoDptoGuarderia, g.TipoGuarderia, g.MailGuarderia, g.DescripcionGuarderia, g.CalificacionGuarderia, g.MascEspecieGuarderia, g.LugaresGuarderia, g.MascTalleGuarderia, g.EstadoGuarderia , g.LugaresGuarderia - (SELECT COUNT(*) FROM masukotto.reservas r WHERE FechaDesdeReserva > curdate() AND FechaHastaReserva < curdate() AND ConfirmaReserva = 1 AND idGuarderia = g.idGuarderia) AS LugaresDisponibles FROM masukotto.guarderias g LEFT JOIN masukotto.fotos f ON g.idGuarderia = f.idGuarderia AND EstadoFoto = 1 AND DescripcionFoto = "PERFIL" WHERE g.idUsuario = ? AND EstadoGuarderia = "Activa"', [id],
+        (err, listaGuarderiasUser) => {
             if (err) {
                 console.log(err);
             }
-            res.render('mascotas', { session: req.session, data: listaMascotas });
+            res.render('guarderias', { session: req.session, data: listaGuarderiasUser });
         })
 };
 
-mascota.add = (req, res) => {
+guarderia.add = (req, res) => {
     const { id } = req.params;
     const data = Object.values(req.body);
     console.log(data);
-    connection.query(`INSERT INTO mascotas (idUsuario, NombreMascota, EspecieMascota,RazaMascota,AnioNacimientoMascota,AlimentoMascota,EnfermedadesMascota,VetNombreMascota,VetTelMascota,EstadoMascota) VALUES (?,?,'Activa')`, [id, data],
-        (err, ins) => {
+    connection.query(`INSERT INTO guarderias (idUsuario, NombreGuarderia, MascEspecieGuarderia, TipoGuarderia, MascTalleGuarderia, LugaresGuarderia, DescripcionGuarderia, DomCalleGuarderia, DomNumeroGuarderia,DomPisoDptoGuarderia,LocalidadGuarderia,ProvinciaGuarderia,CPGuarderia,TelGuarderia,EstadoGuarderia) VALUES (?,?,'Pendiente')`, [id, data],
+        (err, insg) => {
             if (err) {
                 console.log(err);
             }
-            console.log('insert de mascota completado');
+            console.log('insert de guarderias completado');
         })
 
-    connection.query('INSERT INTO fotos (RutaFoto, idUsuario, idMascota, EstadoFoto, DescripcionFoto) VALUES (?,?,(SELECT LAST_INSERT_ID() AS LII From masukotto.mascotas GROUP BY LAST_INSERT_ID()),1,"PERFIL")', [req.file.filename, id],
+    connection.query('INSERT INTO fotos (RutaFoto, idUsuario, idGuarderia, EstadoFoto, DescripcionFoto) VALUES (?,?,(SELECT LAST_INSERT_ID() AS LII From masukotto.guarderias GROUP BY LAST_INSERT_ID()),1,"PERFIL")', [req.file.filename, id],
         (err, insf) => {
             if (err) {
                 console.log(err);
@@ -38,12 +38,12 @@ mascota.add = (req, res) => {
 
 }
 
-mascota.update = (req, res) => {
+guarderia.update = (req, res) => {
     const { id } = req.params;
     const updpet = req.body;
     console.log(updpet)
-    connection.query('UPDATE masukotto.mascotas SET ? WHERE idMascota = ?', [updpet, id],
-            (err, updatapet) => {
+    connection.query('UPDATE masukotto.guarderias SET ? WHERE idGuarderia = ?', [updpet, id],
+            (err, updatacare) => {
                 if (err) {
                     console.log(err);
                 }
@@ -62,11 +62,11 @@ mascota.update = (req, res) => {
 
 }
 
-mascota.delete = (req, res) => {
+guarderia.delete = (req, res) => {
     const { id } = req.params;
     console.log(req.params)
-    connection.query('UPDATE masukotto.mascotas SET EstadoMascota = "Inactiva" WHERE idMascota = ?', [id],
-        (err, delpet) => {
+    connection.query('UPDATE masukotto.guarderias SET EstadoGuarderia = "Inactiva" WHERE idMascota = ?', [id],
+        (err, delcare) => {
             if (err) {
                 console.log(err);
             }
@@ -77,4 +77,4 @@ mascota.delete = (req, res) => {
     //console.log(req.file.filename);
 
 };
-module.exports = mascota;
+module.exports = guarderia;

@@ -46,6 +46,15 @@
     background: #3b6fc9
 }
 
+.careprofile :hover {
+    background: #f6f6f6;
+    /*border-radius: 75px;*/
+}
+
+.careadd :hover {
+    background: #3b6fc9
+}
+
 .center-cropped {
     width: 100px;
     height: 100px;
