@@ -29,18 +29,22 @@
                                                         <p style="font-family: Verdana;">
                                                             <%= data[i].LocalidadGuarderia+', '+data[i].ProvinciaGuarderia %>
                                                                 <br>
-                                                                <b>Lugares Disponibles: </b>
-                                                                <%= data[i].LugaresDisponibles+' de '+data[i].LugaresGuarderia %>
-                                                                    <br>
-                                                                    <b>Puntaje: </b>
-                                                                    <%=data[i].CalificacionGuarderia+'/10'%>
-                                                                        <br>
-                                                                        <b>Estado: </b>
-                                                                        <%if (data[i].LugaresDisponibles == 0){%>
-                                                                            Sin lugares disponibles
-                                                                            <%}else{%>
-                                                                                <%=data[i].EstadoGuarderia%>
-                                                                                    <%}%>
+                                                                <b>
+                                                                <%= data[i].LugaresDisponibles%></b> lugares disponibles.
+                                                                <br>
+                                                                <%if(!data[i].CalificacionGuarderia){%>
+                                                                    <%='Sin Calificaciones'%>
+                                                                        <%}else{%>
+                                                                            <b>Puntaje: </b>
+                                                                            <%=data[i].CalificacionGuarderia+'/10'%>
+                                                                                <%}%>
+                                                                                    <br>
+                                                                                    <b>Estado: </b>
+                                                                                    <%if (data[i].LugaresDisponibles == 0){%>
+                                                                                        Sin lugares disponibles
+                                                                                        <%}else{%>
+                                                                                            <%=data[i].EstadoGuarderia%>
+                                                                                                <%}%>
 
                                                         </p>
                                                     </div>
@@ -147,11 +151,11 @@
                                                         </div>
                                                         <div class="col-md-6">
                                                             <label for="DomNumeroGuarderia">Número(*)</label>
-                                                            <input type="text" name="" DomNumeroGuarderia " class="form-control ">
+                                                            <input type="text" name="DomNumeroGuarderia" class="form-control ">
                                                         </div>
                                                         <div class="col-md-6 ">
-                                                            <label for="DomPisoDptoGuarderia ">Piso & Dpto</label>
-                                                            <input type="text " name=" "DomPisoDptoGuarderia" class="form-control">
+                                                            <label for="DomPisoDptoGuarderia">Piso & Dpto</label>
+                                                            <input type="text" name="DomPisoDptoGuarderia" class="form-control">
                                                         </div>
                                                     </div>
                                                     <div class="row">
@@ -193,7 +197,7 @@
 
 
                                 <% for (i=0;i<data.length;i++){ %>
-                                    <div class="modal fade bd-example-modal-lg" id="<%='petno'+data[i].idMascota%>" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                    <div class="modal fade bd-example-modal-lg" id="<%='careno'+data[i].idMascota%>" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                         <div class="modal-dialog modal-lg" role="document">
                                             <div class="modal-content">
                                                 <div class="modal-header">
