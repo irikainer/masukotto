@@ -40,9 +40,9 @@ guarderia.add = (req, res) => {
 
 guarderia.update = (req, res) => {
     const { id } = req.params;
-    const updpet = req.body;
-    console.log(updpet)
-    connection.query('UPDATE masukotto.guarderias SET ? WHERE idGuarderia = ?', [updpet, id],
+    const updcare = req.body;
+
+    connection.query('UPDATE masukotto.guarderias SET ? WHERE idGuarderia = ?', [updcare, id],
             (err, updatacare) => {
                 if (err) {
                     console.log(err);
@@ -57,24 +57,18 @@ guarderia.update = (req, res) => {
                         console.log('Update de Foto OK');
                     }) */
     res.redirect(req.get('referer'));
-
-    //console.log(req.file.filename);
-
 }
 
 guarderia.delete = (req, res) => {
     const { id } = req.params;
     console.log(req.params)
-    connection.query('UPDATE masukotto.guarderias SET EstadoGuarderia = "Inactiva" WHERE idMascota = ?', [id],
+    connection.query('UPDATE masukotto.guarderias SET EstadoGuarderia = "Inactiva" WHERE idGuarderia = ?', [id],
         (err, delcare) => {
             if (err) {
                 console.log(err);
             }
-            console.log('Mascota dada de baja');
+            console.log('Guarderia dada de baja');
         })
     res.redirect(req.get('referer'));
-
-    //console.log(req.file.filename);
-
 };
 module.exports = guarderia;
