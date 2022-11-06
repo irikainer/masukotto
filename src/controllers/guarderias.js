@@ -71,4 +71,14 @@ guarderia.delete = (req, res) => {
         })
     res.redirect(req.get('referer'));
 };
+
+guarderia.listall = (req, res) => {
+    connection.query('SELECT f.RutaFoto, f.DescripcionFoto, g.idGuarderia, g.idUsuario, g.NombreGuarderia, g.TelGuarderia, g.ProvinciaGuarderia, g.LocalidadGuarderia, g.CPGuarderia, g.DomCalleGuarderia, g.DomNumeroGuarderia, g.DomPisoDptoGuarderia, g.TipoGuarderia, g.MailGuarderia, g.DescripcionGuarderia, g.CalificacionGuarderia, g.MascEspecieGuarderia, g.LugaresGuarderia, g.MascTalleGuarderia, g.EstadoGuarderia , g.LugaresGuarderia - (SELECT COUNT(*) FROM masukotto.reservas r WHERE FechaDesdeReserva > curdate() AND FechaHastaReserva < curdate() AND ConfirmaReserva = 1 AND idGuarderia = g.idGuarderia) AS LugaresDisponibles FROM masukotto.guarderias g LEFT JOIN masukotto.fotos f ON g.idGuarderia = f.idGuarderia AND EstadoFoto = 1 AND DescripcionFoto = "PERFIL" WHERE EstadoGuarderia IN ("Activa")',
+        (err, listaGuarderias) => {
+            if (err) {
+                console.log(err);
+            }
+            res.render('guarderialist', { session: req.session, datario: listaGuarderias });
+        })
+};
 module.exports = guarderia;
