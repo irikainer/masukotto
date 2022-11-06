@@ -77,19 +77,23 @@
                             <div class="container-fluid">
                                 <form action="<%= '/guarderiasall/reserva/'+ session.userId %>" method="post" enctype="multipart/form-data">
                                     <div class="row">
-                                        <div class="col-md-6">
-                                            <h5>
+                                        <div class="col-md-12">
+                                            <h5 class="display-5">
                                                 <%=datario[i].NombreGuarderia  %>
                                             </h5>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
                                             <img src="<%='../uploads/'+datario[i].RutaFoto%>" class="rounded float-left img-thumbnail" alt="../uploads/phdog.jpg">
                                         </div>
                                         <div class="col-sm-6">
-                                            <br>
+
                                             <p class="lead">
                                                 <% if(datario[i].MascEspecieGuarderia == 'Ambos'){%>
-                                                    Somos una guarderia de gatos y perros
+                                                    Somos una guarderia para gatos y perros
                                                     <%}else{%>
-                                                        <%='Somos una guarderia de '+datario[i].MascEspecieGuarderia.toLowerCase()%>
+                                                        <%='Somos una guarderia para '+datario[i].MascEspecieGuarderia.toLowerCase()%>
                                                             <%} %>
                                             </p>
 
@@ -117,65 +121,83 @@
                                     </div>
                                     <div class="row">
                                         <div class="col-md-12">
-                                            <p class="lead">Descripcion de la guardería:</p>
-                                            <div class="alert alert-secondary" role="alert">
-                                                <%=datario[i].DescripcionGuarderia  %>
+                                            <label for="DescripcionGuarderia">Acerca de esta Guarderia</label>
+                                            <input type="textarea" class="form-control" name="DescripcionGuarderia" value="<%=datario[i].DescripcionGuarderia  %>" readonly>
+
+                                        </div>
+                                    </div>
+                                    <%if(session.loggedin){%>
+                                        <div class="row">
+                                            <h5 class="display-6">Domicilio de la guarderia</h5>
+
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label for="DomCalleGuarderia">Calle</label>
+                                                <input type="text" name="DomCalleGuarderia" class="form-control" value="<%=datario[i].DomCalleGuarderia  %>" readonly>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <label for="DomNumeroGuarderia">Número</label>
+                                                <input type="text" name="DomNumeroGuarderia" class="form-control" value="<%=datario[i].DomNumeroGuarderia  %>" readonly>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <label for="DomPisoDptoGuarderia">Piso/Dpto</label>
+                                                <input type="text" name="DomPisoDptoGuarderia" class="form-control" value="<%=datario[i].DomPisoDptoGuarderia  %>" readonly>
                                             </div>
                                         </div>
-                                    </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label for="LocalidadGuarderia">Localidad</label>
+                                                <input type="text" name="LocalidadGuarderia" class="form-control" value="<%=datario[i].LocalidadGuarderia  %>" readonly>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label for="ProvinciaGuarderia">Provincia</label>
+                                                <input type="text" name="ProvinciaGuarderia" class="form-control" value="<%=datario[i].ProvinciaGuarderia  %>" readonly>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label for="CPGuarderia">Codigo Postal</label>
+                                                <input type="text" name="CPGuarderia" class="form-control" value="<%=datario[i].CPGuarderia  %>" readonly>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label for="TelGuarderia">Telefono</label>
+                                                <input type="text" name="TelGuarderia" class="form-control" value="<%=datario[i].TelGuarderia  %>" readonly>
+                                            </div>
 
-                                    <div class="row">
-                                        <h5>Datos del Domicilio</h5>
+                                        </div>
+                                        <div class="row">
+                                            <h5 class="display-6">Cargar Reserva</h5>
 
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <label for="DomCalleGuarderia">Calle</label>
-                                            <input type="text" name="DomCalleGuarderia" class="form-control" value="<%=datario[i].DomCalleGuarderia  %>">
                                         </div>
-                                        <div class="col-md-6">
-                                            <label for="DomNumeroGuarderia">Número</label>
-                                            <input type="text" name="DomNumeroGuarderia" class="form-control" value="<%=datario[i].DomNumeroGuarderia  %>">
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <label for="FechaDesdeReserva">Reservar desde</label>
+                                                <input type="date" class="form-control" name="FechaDesdeReserva">
+                                            </div>
+                                            <div class="col-md-4">
+                                                <label for="FechaHastaReserva">Hasta</label>
+                                                <input type="date" class="form-control" name="FechaHastaReserva">
+                                            </div>
+                                            <div class="col-md-4">
+                                                <label for="FechaHastaReserva">Mascota</label>
+                                            </div>
                                         </div>
-                                        <div class="col-md-6">
-                                            <label for="DomPisoDptoGuarderia">Piso/Dpto</label>
-                                            <input type="text" name="DomPisoDptoGuarderia" class="form-control" value="<%=datario[i].DomPisoDptoGuarderia  %>">
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <label for="LocalidadGuarderia">Localidad</label>
-                                            <input type="text" name="LocalidadGuarderia" class="form-control" value="<%=datario[i].LocalidadGuarderia  %>">
-                                        </div>
-                                        <div class="col-md-6">
-                                            <label for="ProvinciaGuarderia">Provincia</label>
-                                            <input type="text" name="ProvinciaGuarderia" class="form-control" value="<%=datario[i].ProvinciaGuarderia  %>">
-                                        </div>
-                                        <div class="col-md-6">
-                                            <label for="CPGuarderia">Codigo Postal</label>
-                                            <input type="text" name="CPGuarderia" class="form-control" value="<%=datario[i].CPGuarderia  %>">
-                                        </div>
-                                        <div class="col-md-6">
-                                            <label for="TelGuarderia">Telefono</label>
-                                            <input type="text" name="TelGuarderia" class="form-control" value="<%=datario[i].TelGuarderia  %>">
-                                        </div>
-                                    </div>
 
-                                    <br>
-                                    <div class="modal-footer">
+                                        <% } %>
+                                            <br>
+                                            <div class="modal-footer">
 
-                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-
-                                        <button type="submit" class="btn btn-primary">Reservar</button>
-                                        <!-- <button type="button" class="btn btn-Danger">Eliminar</button> -->
-                                    </div>
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                                                <%if(session.loggedin){%>
+                                                    <button type="submit" class="btn btn-primary">Reservar</button>
+                                                    <% } %>
+                                                        <!-- <button type="button" class="btn btn-Danger">Eliminar</button> -->
+                                            </div>
                             </div>
                         </div>
                         </form>
                     </div>
                 </div>
             </div>
-
             <%}%>
 
                 <%- include ("partials/_footer") %>
