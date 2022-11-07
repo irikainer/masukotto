@@ -47,7 +47,7 @@ userController.update = (req, res) => {
     const { id } = req.params;
     const newCustomer = req.body;
     connection.query('UPDATE usuarios set ? where idUsuario = ?', [newCustomer, id], (err, rows) => {
-        res.redirect('/');
+        res.redirect(`/profile/${id}`);
     });
 };
 
