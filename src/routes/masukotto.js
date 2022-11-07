@@ -50,6 +50,7 @@ router.get('/guarderias/:id', userSessionController.isAuthenticated, guarderia.l
 router.post('/guarderias/:id/careadd', userSessionController.isAuthenticated, guarderia.add);
 router.post('/guarderias/careupdate/:id', userSessionController.isAuthenticated, guarderia.update);
 router.post('/guarderias/caredelete/:id', userSessionController.isAuthenticated, guarderia.delete);
-router.get('/guarderiasall', guarderia.listall);
+router.get('/guarderiasall/:id', guarderia.listall);
+router.post('/guarderiasall/reserva/:id', userSessionController.isAuthenticated, guarderia.addreserva);
 
 module.exports = router;

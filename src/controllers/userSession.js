@@ -111,7 +111,7 @@ userSessionController.forget = (req, res) => {
     }
 }
 
-userSessionController.isAuthenticated = async (req, res, next) => {
+userSessionController.isAuthenticated = async(req, res, next) => {
     if (req.cookies.jwt) {
         try {
             const decoded = await promisify(jwt.verify)(req.cookies.jwt, "secret");
@@ -127,6 +127,22 @@ userSessionController.isAuthenticated = async (req, res, next) => {
     } else {
         res.redirect("/inicioSesion");
     }
+}
+
+userSessionController.isAuthenticatednored = async(req, res, next) => {
+    if (req.cookies.jwt) {
+        try {
+            const decoded = await promisify(jwt.verify)(req.cookies.jwt, "secret");
+            connection.query("SELECT * FROM usuarios WHERE idUsuario = ?", [decoded.idUsuario], (error, results) => {
+                if (!results) next();
+                req.userEmail = results[0];
+                return next();
+            })
+        } catch (error) {
+            console.log(error);
+            return next();
+        }
+    } else { res.redirect(req.get('referer')) }
 }
 
 module.exports = userSessionController;

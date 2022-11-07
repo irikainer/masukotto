@@ -5,8 +5,9 @@
         </div>
 
         <div class="d-flex justify-content-evenly bg-primary pt-3 pb-3">
-            <button type="button" class="btn btn-info w-25 fs-4" onclick="location.href='/guarderiasall';">Buscar guarderías</button>
-            <button type="button" class="btn btn-warning w-25 fs-4">Publicar servicios</button>
+            <% if(!session.loggedin){vari='a'}else{vari=session.userId} %>
+                <button type="button" class="btn btn-info w-25 fs-4" onclick="location.href='/guarderiasall/<%= vari %> ';">Buscar guarderías</button>
+                <button type="button" class="btn btn-warning w-25 fs-4">Publicar servicios</button>
 
         </div>
 

@@ -178,7 +178,15 @@
                                                 <input type="date" class="form-control" name="FechaHastaReserva">
                                             </div>
                                             <div class="col-md-4">
-                                                <label for="FechaHastaReserva">Mascota</label>
+                                                <div class="form-group">
+                                                    <label for="NombreMascota">Mascota</label>
+                                                    <select type="text" name="NombreMascota" class="form-control">
+                                                        <option value=""></option>
+                                                    <% for (i=0;i<mascdata.length;i++){ %>
+                                                        <option value="<%=mascdata[i].NombreMascota%>"><%=mascdata[i].NombreMascota%></option>    
+                                                    <% } %>  
+                                                </select>
+                                                </div>
                                             </div>
                                         </div>
 

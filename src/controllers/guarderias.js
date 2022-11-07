@@ -73,12 +73,38 @@ guarderia.delete = (req, res) => {
 };
 
 guarderia.listall = (req, res) => {
+    const { id } = req.params;
     connection.query('SELECT f.RutaFoto, f.DescripcionFoto, g.idGuarderia, g.idUsuario, g.NombreGuarderia, g.TelGuarderia, g.ProvinciaGuarderia, g.LocalidadGuarderia, g.CPGuarderia, g.DomCalleGuarderia, g.DomNumeroGuarderia, g.DomPisoDptoGuarderia, g.TipoGuarderia, g.MailGuarderia, g.DescripcionGuarderia, g.CalificacionGuarderia, g.MascEspecieGuarderia, g.LugaresGuarderia, g.MascTalleGuarderia, g.EstadoGuarderia , g.LugaresGuarderia - (SELECT COUNT(*) FROM masukotto.reservas r WHERE FechaDesdeReserva > curdate() AND FechaHastaReserva < curdate() AND ConfirmaReserva = 1 AND idGuarderia = g.idGuarderia) AS LugaresDisponibles FROM masukotto.guarderias g LEFT JOIN masukotto.fotos f ON g.idGuarderia = f.idGuarderia AND EstadoFoto = 1 AND DescripcionFoto = "PERFIL" WHERE EstadoGuarderia IN ("Activa")',
         (err, listaGuarderias) => {
             if (err) {
                 console.log(err);
             }
-            res.render('guarderialist', { session: req.session, datario: listaGuarderias });
+
+            connection.query('SELECT NombreMascota FROM masukotto.mascotas WHERE idUsuario = ? AND EstadoMascota ="Activa" AND idUsuario IS NOT NULL', [id],
+                (err, mascotlist) => {
+                    if (err) {
+                        console.log(err);
+                    }
+                    console.log(mascotlist)
+                    console.log(req.body)
+                    res.render('guarderialist', { session: req.session, datario: listaGuarderias, mascdata: mascotlist });
+                })
         })
 };
+
+guarderia.addreserva = (req, res) => {
+    const { id } = req.params;
+    const datareserva = Object.values(req.body);
+    connection.query(`INSERT INTO guarderias (idUsuarioMascoter, idUsuarioGuarderia, idMascota, idGuarderia, FechaDesdeReserva, FechaHastaReserva, ConfirmaReserva, EstadoReserva) VALUES (?,?,0,"Pendiente")`, [id, datareserva],
+        (err, insr) => {
+            if (err) {
+                console.log(err);
+            }
+            console.log('insert de reserva completado');
+        })
+    res.redirect('/');
+
+    //console.log(req.file.filename);
+
+}
 module.exports = guarderia;
