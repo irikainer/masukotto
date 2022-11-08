@@ -8,7 +8,7 @@ controller.usersList = (req, res) => {
         }
         res.render('customers', {
             data: usuarios,
-            session: req.session 
+            session: req.session
         });
     })
 }
@@ -20,13 +20,13 @@ controller.dayCaresList = (req, res) => {
         }
         res.render('dayCares', {
             data: daycares,
-            session: req.session 
+            session: req.session
         });
     })
 }
 
-controller.hideUsers = (req,res) => {
-    const {id} = req.params
+controller.hideUsers = (req, res) => {
+    const { id } = req.params
     connection.query('DELETE FROM usuarios WHERE idUsuario = ?', [id], (err, user) => {
         if (user) {
             res.redirect('/users');
@@ -34,8 +34,9 @@ controller.hideUsers = (req,res) => {
     })
 }
 
-controller.hideDayCares = (req,res) => {
-    const {id} = req.params
+controller.hideDayCares = async (req, res) => {
+    const { id } = req.params
+    connection.query('DELETE FROM fotos WHERE idGuarderia = ?', [id])
     connection.query('DELETE FROM guarderias WHERE idGuarderia = ?', [id], (err, dayCare) => {
         if (dayCare) {
             res.redirect('/dayCares');
