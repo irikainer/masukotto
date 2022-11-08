@@ -10,8 +10,6 @@ userSessionController.login = (req, res) => {
     try {
         const userEmail = req.body.email;
         const password = req.body.password;
-        let passEncoded = base64encode(password);
-
         if (!userEmail || !password) {
             res.render("inicioSesion", {
                 alert: true,
@@ -24,11 +22,11 @@ userSessionController.login = (req, res) => {
             });
         } else {
             connection.query("SELECT * FROM usuarios WHERE MailUsuario = ?", [userEmail], (error, results) => {
-                if (results.length == 0 || !(passEncoded !== results[0].PassUsuario)) {
+                if (results.length == 0 || password !== results[0].PassUsuario) {
                     res.render("inicioSesion", {
                         alert: true,
                         alertTitle: "Advertencia",
-                        alertMessage: "Ingrese un usuario y contraseña",
+                        alertMessage: "Credenciales incorrectas",
                         alertIcon: "info",
                         showConfirmButton: true,
                         timer: false,
@@ -40,7 +38,6 @@ userSessionController.login = (req, res) => {
                     req.session.loggedin = true;
                     req.session.userId = userId;
                     req.session.typeUser = results[0].idTipoUsuario
-                    console.log(req)
                     const cookiesOptions = {
                         expires: new Date(Date.now() + "90" * 24 * 60 * 60 * 1000),
                         httpOnly: true
@@ -93,12 +90,11 @@ userSessionController.forget = (req, res) => {
                     ruta: "recuperarPassword"
                 });
             } else {
-                const encodedPass = results[0].PassUsuario;
-                const decodedPass = base64decode(encodedPass);
+                const userPassword = results[0].PassUsuario;
                 res.render("recuperarPassword", {
                     alert: true,
                     alertTitle: "Email correcto",
-                    alertMessage: `Tu password es: ${decodedPass}`,
+                    alertMessage: `Tu password es: ${userPassword}`,
                     alertIcon: "success",
                     showConfirmButton: true,
                     timer: false,
@@ -111,7 +107,7 @@ userSessionController.forget = (req, res) => {
     }
 }
 
-userSessionController.isAuthenticated = async(req, res, next) => {
+userSessionController.isAuthenticated = async (req, res, next) => {
     if (req.cookies.jwt) {
         try {
             const decoded = await promisify(jwt.verify)(req.cookies.jwt, "secret");
@@ -129,7 +125,7 @@ userSessionController.isAuthenticated = async(req, res, next) => {
     }
 }
 
-userSessionController.isAuthenticatednored = async(req, res, next) => {
+userSessionController.isAuthenticatednored = async (req, res, next) => {
     if (req.cookies.jwt) {
         try {
             const decoded = await promisify(jwt.verify)(req.cookies.jwt, "secret");
