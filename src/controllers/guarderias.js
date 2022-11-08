@@ -1,5 +1,7 @@
 const guarderia = {};
 const connection = require("../../database/dbConn");
+const { promisify } = require("util");
+const jwt = require("jsonwebtoken");
 
 guarderia.list = (req, res) => {
     const { id } = req.params;
@@ -43,19 +45,19 @@ guarderia.update = (req, res) => {
     const updcare = req.body;
 
     connection.query('UPDATE masukotto.guarderias SET ? WHERE idGuarderia = ?', [updcare, id],
-            (err, updatacare) => {
-                if (err) {
-                    console.log(err);
-                }
-                console.log('Update de datos OK');
-            })
-        /*     connection.query('UPDATE masukotto.fotos SET RutaFoto = ?  WHERE idFoto = ?', [updpet, id],
-                    (err, updphpet) => {
-                        if (err) {
-                            console.log(err);
-                        }
-                        console.log('Update de Foto OK');
-                    }) */
+        (err, updatacare) => {
+            if (err) {
+                console.log(err);
+            }
+            console.log('Update de datos OK');
+        })
+    /*     connection.query('UPDATE masukotto.fotos SET RutaFoto = ?  WHERE idFoto = ?', [updpet, id],
+                (err, updphpet) => {
+                    if (err) {
+                        console.log(err);
+                    }
+                    console.log('Update de Foto OK');
+                }) */
     res.redirect(req.get('referer'));
 }
 
@@ -80,31 +82,34 @@ guarderia.listall = (req, res) => {
                 console.log(err);
             }
 
-            connection.query('SELECT NombreMascota FROM masukotto.mascotas WHERE idUsuario = ? AND EstadoMascota ="Activa" AND idUsuario IS NOT NULL', [id],
+            connection.query('SELECT idMascota, NombreMascota FROM masukotto.mascotas WHERE idUsuario = ? AND EstadoMascota ="Activa" AND idUsuario IS NOT NULL', [id],
                 (err, mascotlist) => {
                     if (err) {
                         console.log(err);
                     }
-                    console.log(mascotlist)
-                    console.log(req.body)
+
                     res.render('guarderialist', { session: req.session, datario: listaGuarderias, mascdata: mascotlist });
                 })
         })
 };
 
-guarderia.addreserva = (req, res) => {
+guarderia.addreserva = async (req, res) => {
     const { id } = req.params;
-    const datareserva = Object.values(req.body);
-    connection.query(`INSERT INTO guarderias (idUsuarioMascoter, idUsuarioGuarderia, idMascota, idGuarderia, FechaDesdeReserva, FechaHastaReserva, ConfirmaReserva, EstadoReserva) VALUES (?,?,0,"Pendiente")`, [id, datareserva],
-        (err, insr) => {
-            if (err) {
-                console.log(err);
-            }
-            console.log('insert de reserva completado');
+    const { FechaDesdeReserva, FechaHastaReserva, DomCalleGuarderia, DomNumeroGuarderia, NombreMascota } = req.body;
+    console.log(DomCalleGuarderia, DomNumeroGuarderia);
+    connection.query(`SELECT idGuarderia FROM guarderias WHERE DomCalleGuarderia = ? AND DomNumeroGuarderia = ?`, [DomCalleGuarderia, DomNumeroGuarderia], (err, data) => {
+        if (err) console.log(err);
+        const idGuarderiaBody = data[0].idGuarderia;
+        connection.query(`SELECT idMascota FROM mascotas WHERE idUsuario = ? AND NombreMascota = ? AND EstadoMascota = "Activa"`, [id, NombreMascota], (err, data) => {
+            const idMascota = data[0].idMascota
+            connection.query(`INSERT INTO reservas (idUsuarioMascoter, idMascota, idGuarderia, FechaDesdeReserva, FechaHastaReserva, ConfirmaReserva, EstadoReserva) VALUES (?,?,?,?,?,0,"Pendiente")`, [+id, idMascota, idGuarderiaBody, FechaDesdeReserva, FechaHastaReserva],
+                (err, insr) => {
+                    if (err) {
+                        console.log(err);
+                    }
+                })
         })
+    })
     res.redirect('/');
-
-    //console.log(req.file.filename);
-
 }
 module.exports = guarderia;

@@ -4,25 +4,33 @@
         <div class="container mt-5">
             <div class="card">
                 <div class="card-body mt-5">
-                    <% if (datario.length == 0) {%>
+                    <% if (datario.length==0) {%>
                         <h1 class="text-center">No tenemos guarderias disponibles en este momento</h1>
                         <% }else { %>
                             <div class="container">
                                 <div class="row">
                                     <% if (datario) { %>
                                         <% for (i=0;i<datario.length;i++){ %>
-                                            <div class="col-4 mb-2 card petprofile" style="box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);max-width: 400px;margin-right: 7px;">
+                                            <div class="col-4 mb-2 card petprofile"
+                                                style="box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);max-width: 400px;margin-right: 7px;">
                                                 <div class="row">
                                                     <div class="col-5" style="padding: 5px 5px 5px 5px;">
-                                                        <div class="crop rounded border" style="background-color: white;">
-                                                            <% if(!datario[i].RutaFoto){datario[i].RutaFoto='phdog.jpg'} %>
+                                                        <div class="crop rounded border"
+                                                            style="background-color: white;">
+                                                            <% if(!datario[i].RutaFoto){datario[i].RutaFoto='phdog.jpg'
+                                                                } %>
 
-                                                                <a data-toggle="modal" href="<%='#consulta'+datario[i].idGuarderia %>"><img src="<%='../uploads/'+datario[i].RutaFoto%>" alt="guarderia" class="img"></a>
+                                                                <a data-toggle="modal"
+                                                                    href="<%='#consulta'+datario[i].idGuarderia %>"><img
+                                                                        src="<%='../uploads/'+datario[i].RutaFoto%>"
+                                                                        alt="guarderia" class="img"></a>
                                                         </div>
                                                     </div>
                                                     <div class="col-7 mt-1">
                                                         <h5>
-                                                            <a data-toggle="modal" class="stretched-link " href="<%='#consulta'+datario[i].idGuarderia %>" style="color:#343a40;text-decoration: none;">
+                                                            <a data-toggle="modal" class="stretched-link "
+                                                                href="<%='#consulta'+datario[i].idGuarderia %>"
+                                                                style="color:#343a40;text-decoration: none;">
                                                                 <%= datario[i].NombreGuarderia %>
                                                             </a>
                                                         </h5>
@@ -33,18 +41,18 @@
                                                                 <%= datario[i].LugaresDisponibles%></b> lugares disponibles.
                                                                 <br>
                                                                 <%if(!datario[i].CalificacionGuarderia){%>
-                                                                    <%='Sin Calificaciones'%>
-                                                                        <%}else{%>
-                                                                            <b>Puntaje: </b>
-                                                                            <%=datario[i].CalificacionGuarderia+'/10'%>
-                                                                                <%}%>
-                                                                                    <br>
-                                                                                    <b>Estado: </b>
-                                                                                    <%if (datario[i].LugaresDisponibles == 0){%>
-                                                                                        Sin lugares disponibles
-                                                                                        <%}else{%>
-                                                                                            <%=datario[i].EstadoGuarderia%>
-                                                                                                <%}%>
+                                                                    <%=' Sin Calificaciones'%>
+                                                                <%}else{%>
+                                                                    <b>Puntaje: </b>
+                                                                    <%=datario[i].CalificacionGuarderia+' /10'%>
+                                                                        <%}%>
+                                                                            <br>
+                                                                            <b>Estado: </b>
+                                                                            <%if (datario[i].LugaresDisponibles==0){%>
+                                                                                Sin lugares disponibles
+                                                                                <%}else{%>
+                                                                                    <%=datario[i].EstadoGuarderia%>
+                                                                                        <%}%>
                                                         </p>
                                                     </div>
                                                 </div>
@@ -62,7 +70,8 @@
             </div>
         </div>
         <% for (i=0;i<datario.length;i++){ %>
-            <div class="modal fade bd-example-modal-lg" id="<%='consulta'+datario[i].idGuarderia%>" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal fade bd-example-modal-lg" id="<%='consulta'+datario[i].idGuarderia%>" tabindex="-1"
+                role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                 <div class="modal-dialog modal-lg" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
@@ -70,27 +79,29 @@
                                 Datos de Guarderia
                             </h5>
                             <button type="button" class="btn btn-light" data-dismiss="modal" aria-label="Close">
-                                            <span aria-hidden="true">X</span>
-                                        </button>
+                                <span aria-hidden="true">X</span>
+                            </button>
                         </div>
                         <div class="modal-body">
                             <div class="container-fluid">
-                                <form action="<%= '/guarderiasall/reserva/'+ session.userId %>" method="post" enctype="multipart/form-data">
+                                <form action="<%= '/guarderiasall/reserva/'+ session.userId %>" method="post"
+                                    enctype="multipart/form-data">
                                     <div class="row">
                                         <div class="col-md-12">
                                             <h5 class="display-5">
-                                                <%=datario[i].NombreGuarderia  %>
+                                                <%=datario[i].NombreGuarderia %>
                                             </h5>
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="col-md-6">
-                                            <img src="<%='../uploads/'+datario[i].RutaFoto%>" class="rounded float-left img-thumbnail" alt="../uploads/phdog.jpg">
+                                            <img src="<%='../uploads/'+datario[i].RutaFoto%>"
+                                                class="rounded float-left img-thumbnail" alt="../uploads/phdog.jpg">
                                         </div>
                                         <div class="col-sm-6">
 
                                             <p class="lead">
-                                                <% if(datario[i].MascEspecieGuarderia == 'Ambos'){%>
+                                                <% if(datario[i].MascEspecieGuarderia=='Ambos' ){%>
                                                     Somos una guarderia para gatos y perros
                                                     <%}else{%>
                                                         <%='Somos una guarderia para '+datario[i].MascEspecieGuarderia.toLowerCase()%>
@@ -98,16 +109,16 @@
                                             </p>
 
                                             <p class="lead">
-                                                <% if(datario[i].TipoGuarderia == 'Solo de día'){%>
-                                                    Alojamiento diurno
-                                                    <%}else{%>
-                                                        Alojamiento completo
-                                                        <%} %>
+                                                <% if(datario[i].TipoGuarderia == ' Solo de día'){%>
+                                                            Alojamiento diurno
+                                                            <%}else{%>
+                                                                Alojamiento completo
+                                                                <%} %>
                                             </p>
                                             <p class="lead">
-                                                <% if(datario[i].MascTalleGuarderia == 'Pequeños'){%>
+                                                <% if(datario[i].MascTalleGuarderia=='Pequeños' ){%>
                                                     Admitimos mascotas pequeñas
-                                                    <%}else if(datario[i].MascTalleGuarderia == 'Medianos'){%>
+                                                    <%}else if(datario[i].MascTalleGuarderia=='Medianos' ){%>
                                                         Admitimos mascotas medianas
                                                         <%}else {%>
                                                             Admitimos mascotas grandes
@@ -183,9 +194,11 @@
                                                     <select type="text" name="NombreMascota" class="form-control">
                                                         <option value=""></option>
                                                     <% for (i=0;i<mascdata.length;i++){ %>
-                                                        <option value="<%=mascdata[i].NombreMascota%>"><%=mascdata[i].NombreMascota%></option>    
+                                                        <option value="<%=mascdata[i].NombreMascota%>"><%=mascdata[i].NombreMascota%></option>
+                                                        <input type="hidden" value="<%=mascdata[i].idMascota%>"/>    
                                                     <% } %>  
                                                 </select>
+
                                                 </div>
                                             </div>
                                         </div>
