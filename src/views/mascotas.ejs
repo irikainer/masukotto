@@ -1,0 +1,246 @@
+<%- include('partials/header') %>
+    <%- include('partials/navbar') %>
+        <!-- Button trigger modal -->
+        <div class="container mt-5">
+            <div class="card">
+                <div class="card-body mt-5">
+                    <% if (data.length == 0) {%>
+                        <h1 class="text-center">Pasanos los datos de tus mascotas!</h1>
+                        <% }else { %>
+                            <div class="container">
+                                <div class="row">
+                                    <% if (data) { %>
+                                        <% for (i=0;i<data.length;i++){ %>
+                                            <div class="col-4 mb-2 card petprofile" style="box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);max-width: 400px;margin-right: 7px;">
+                                                <div class="row">
+                                                    <div class="col-5" style="padding: 5px 5px 5px 5px;">
+                                                        <div class="crop rounded border" style="background-color: white;">
+                                                            <% if(!data[i].RutaFoto){data[i].RutaFoto='phdog.jpg'} %>
+
+                                                                <a data-toggle="modal" href="<%='#petno'+data[i].idMascota %>"><img src="<%='../uploads/'+data[i].RutaFoto%>" alt="mascota" class="img"></a>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-7 mt-1">
+                                                        <h5>
+                                                            <a data-toggle="modal" class="stretched-link " href="<%='#petno'+data[i].idMascota %>" style="color:#343a40;text-decoration: none;">
+                                                                <%= data[i].NombreMascota %>
+                                                            </a>
+                                                        </h5>
+                                                        <p style="font-family: Verdana;"><b>Especie: </b>
+                                                            <%= data[i].EspecieMascota %>
+                                                                <br>
+                                                                <b>Raza: </b>
+                                                                <%= data[i].RazaMascota %>
+                                                                    <br>
+                                                                    <b><%=new Date().getFullYear()-parseInt(data[i].AnioNacimientoMascota) %> años</b>
+
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <% } %>
+                                                <% } %>
+                                                    <% } %>
+
+                                                        <div class="col-4 mb-2 card text-white bg-primary petadd" style="box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);max-width: 400px;margin-right: 7px;">
+                                                            <div class="row">
+                                                                <div class="col-5" style="padding: 5px 5px 5px 5px;">
+                                                                    <div class="crop rounded border" style="background-color: white;">
+                                                                        <img src="../uploads/phdog.jpg" alt="mascota" class="img">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-7">
+                                                                    <h5><br><br>
+                                                                        <a class="stretched-link" data-toggle="modal" href="#AltaMascota"></a> Agregar Mascota
+
+                                                                    </h5>
+
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                </div>
+                                <!-- FORMULARIO DE AGREGADO DE MASCOTA -->
+
+
+                                <!-- Modal -->
+                                <div class="modal fade bd-example-modal-lg" id="AltaMascota" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                    <div class="modal-dialog modal-lg" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalLongTitle">Datos de tu Mascota!</h5>
+                                                <button type="button" class="btn btn-light" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">X</span>
+                                        </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <div class="container-fluid">
+                                                    <div class="row">
+                                                        <div class="col-md-6">
+                                                            <form action="/mascotas/<%= session.userId %>/petadd" method="post" enctype="multipart/form-data">
+                                                                <label for="NombreMascota">Nombre(*)</label>
+                                                                <input type="text" name="NombreMascota" class="form-control">
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <label for="EspecieMascota">Especie(*)</label>
+                                                                <select type="text" name="EspecieMascota" class="form-control">
+                                                                    <option value=""></option>
+                                                                <option value="Perro">Perro</option>    
+                                                                <option value="Gato">Gato</option>    
+                                                            </select>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-md-4">
+                                                            <label for="RazaMascota">Raza(*)</label>
+                                                            <input type="text" name="RazaMascota" class="form-control">
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                            <label for="AnioNacimientoMascota">Año de Nacimiento</label>
+                                                            <input type="text" name="AnioNacimientoMascota" class="form-control">
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                            <label for="AlimentoMascota">Alimento</label>
+                                                            <input type="text" name="AlimentoMascota" class="form-control">
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="row">
+                                                        <div class="col-md-6">
+                                                            <label for="EnfermedadesMascota">Enfermedades</label>
+                                                            <textarea name="EnfermedadesMascota" rows="3" class="form-control"></textarea>
+
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <h5>Datos de tu Veterinario</h5>
+
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-md-6">
+                                                            <label for="VetNombreMascota">Nombre de tu Veterinario</label>
+                                                            <input type="text" name="VetNombreMascota" class="form-control">
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <label for="VetTelMascota">Telefono de tu Veterinario</label>
+                                                            <input type="text" name="VetTelMascota" class="form-control">
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="form-group mt-3 mb-3">
+                                                            <label for="foto">Foto de Perfil de tu mascota</label>
+                                                            <input type="file" class="form-control" name="foto">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                                                <button type="submit" class="btn btn-primary">Guardar Mascota</button>
+                                            </div>
+                                            </form>
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- TERMINA FORMULARIO DE AGREGADO Y COMIENZA FORMULARIO DE MODIFICACION O BORRADO -->
+
+
+                                <% for (i=0;i<data.length;i++){ %>
+                                    <div class="modal fade bd-example-modal-lg" id="<%='petno'+data[i].idMascota%>" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                        <div class="modal-dialog modal-lg" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="exampleModalLongTitle">
+                                                        <%='Datos de '+data[i].NombreMascota%>
+                                                    </h5>
+                                                    <button type="button" class="btn btn-light" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">X</span>
+                                        </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <div class="container-fluid">
+                                                        <div class="row">
+                                                            <div class="col-md-6">
+                                                                <form action="<%= '/mascotas/petupdate/'+data[i].idMascota %>" method="post" enctype="multipart/form-data">
+                                                                    <label for="NombreMascota">Nombre</label>
+                                                                    <input type="text" name="NombreMascota" value="<%=data[i].NombreMascota  %>" class="form-control">
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                                <div class="form-group">
+                                                                    <label for="EspecieMascota">Especie</label>
+                                                                    <p>
+                                                                        <%=data[i].EspecieMascota%>
+                                                                    </p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-md-4">
+                                                                <label for="RazaMascota">Raza(*)</label>
+                                                                <p>
+                                                                    <%=data[i].RazaMascota%>
+                                                                </p>
+                                                            </div>
+                                                            <div class="col-md-4">
+                                                                <label for="AnioNacimientoMascota">Año de Nacimiento</label>
+                                                                <p>
+                                                                    <%=data[i].AnioNacimientoMascota  %>
+                                                                </p>
+                                                            </div>
+                                                            <div class="col-md-4">
+                                                                <label for="AlimentoMascota">Alimento</label>
+                                                                <input type="text" name="AlimentoMascota" class="form-control" value="<%=data[i].AlimentoMascota  %>">
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="row">
+                                                            <div class="col-md-6">
+                                                                <label for="EnfermedadesMascota">Enfermedades</label>
+                                                                <textarea name="EnfermedadesMascota" rows="3" class="form-control"><%=data[i].EnfermedadesMascota  %></textarea>
+
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <h5>Datos de tu Veterinario</h5>
+
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-md-6">
+                                                                <label for="VetNombreMascota">Nombre de tu Veterinario</label>
+                                                                <input type="text" name="VetNombreMascota" class="form-control" value="<%=data[i].VetNombreMascota  %>">
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                                <label for="VetTelMascota">Telefono de tu Veterinario</label>
+                                                                <input type="text" name="VetTelMascota" class="form-control" value="<%=data[i].VetTelMascota  %>">
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="form-group mt-3 mb-3">
+                                                                <img src="<%='../uploads/'+data[i].RutaFoto%>" alt="../uploads/phdog.jpg">
+                                                                <!-- <label for="foto">Foto de Perfil de tu mascota</label>
+                                                                <input type="file" class="form-control-file" name="foto"> -->
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="submit" class="btn btn-danger" formaction="<%= '/mascotas/petdelete/'+data[i].idMascota %>">Borrar</button>
+                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                                                    <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+                                                    <!-- <button type="button" class="btn btn-Danger">Eliminar</button> -->
+                                                </div>
+                                                </form>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <%}%>
+                            </div>
+                </div>
+
+            </div>
+            <%- include ("partials/_footer") %>
